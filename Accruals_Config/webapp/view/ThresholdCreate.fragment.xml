@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog title="Create Threshold Configuration" contentWidth="690px" class="dialog" horizontalScrolling="false" id="formEdit">
+		<beginButton>
+			<Button text="Cancel" press="onCancel" class="cancelbtn"/>
+		</beginButton>
+		<endButton>
+			<Button text="Save" type="Reject" press="onThresholdSave" class="savebtn"/>
+		</endButton>
+			<f:SimpleForm id="ChangeForm" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1" adjustLabelSpan="false">
+				<f:content>
+					<Label text="Currency"/>
+					<Input placeholder ="Currency" 
+						   required="true" width="290px"  maxLength="3"
+						   class="select" 
+						   id="currThresholdCreate"  />
+					
+					<Label text="Country Code"/>
+					 <Input placeholder ="CountryCode" 
+						   required="true" width="290px"  maxLength="50"
+						   class="select" 
+						   id="ccodethresholdCreate"  />
+						   
+					<Label text="Threshold Amount"/>
+					 <Input placeholder ="Threshold Amount" 
+						   required="true" width="290px"
+						   class="select" maxLength="16"
+						   id="thresholdCreate"  />
+					
+				</f:content>
+			</f:SimpleForm>
+	</Dialog>
+</core:FragmentDefinition>

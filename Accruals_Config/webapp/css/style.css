@@ -1,0 +1,80 @@
+/* Enter your custom styles here *//* Enter your custom styles here */
+.sapUiIcon::before {
+    content: attr(data-sap-ui-icon-content);
+    speak: none;
+    /* color: #ee1100; */
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+}
+span.sapMBtnInner.sapMBtnReject {
+    /*background-image: none;*/
+    background-color: #ee1100;
+    border-color: #ee1100;
+    color: #fff;
+}
+.sapMBtn:hover>.sapMBtnHoverable.sapMBtnReject:not(.sapMBtnActive):not(.sapMToggleBtnPressed) {
+    background-color: #ee1100;
+    border-color: #ee1100;
+    color: #fff;
+}
+.sapMBtn:hover>.sapMBtnHoverable.sapMBtnReject:not(.sapMBtnActive):not(.sapMToggleBtnPressed) bdi {
+    color: #fff;
+}
+.sapMBtn:hover>.sapMBtnHoverable {
+    /*background-image: none;*/
+    background-color: #fff;
+    border-color: #ee1100;
+    color: #ee1100;
+}
+.sapMBtnInner {
+    background-color: #fff;
+    border: .0625rem solid #ee1100;
+    color: #ee1100;
+}
+
+.titleBoldUser{
+	font-weight: Bold;
+	font-size : 1.7rem;
+}
+.sapMIBar-CTX .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {
+    background-color: #fff;
+    color: #ee1100;
+    border-color: #ee1100!important;
+}
+.sapMIBar-CTX .sapMBtn:hover>.sapMBtnHoverable.sapMBtnEmphasized:not(.sapMBtnActive) {
+    background-color: #ee1100;
+    border-color: #ee100;
+    color: #fff;
+    text-shadow: 0 0 0.125rem transparent;
+}
+span.sapMBtnInner.sapMBtnEmphasized {
+    background-image: none;
+    background-color: #ee1100;
+    border-color: #ee1100;
+    color: #fff;
+    text-shadow: 0 0 0.125rem transparent;
+}
+/*.sapUiIcon::before {*/
+/*    content: attr(data-sap-ui-icon-content);*/
+/*    speak: none;*/
+/*    color: #ee1100;*/
+/*    font-weight: normal;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*}*/
+
+
+.dialogTitle {
+    /*font-family: "sans-serif,bold";*/
+    font-size: 22px !important;
+    font-weight: bold !important;
+    color: #4B4948 !important;
+    /*margin-left: 1rem !important;*/
+}
+
+
+.feasibilityTextArea1 {
+    padding: 1rem 0.6rem 1rem 1.1rem;
+    margin-top: -1.5rem !important;
+    /*    margin-left: 1.1rem!important;*/
+    /*    margin-right: 0.6rem!important;*/
+}

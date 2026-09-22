@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Dialog showHeader="false" contentWidth="690px" class="dialog" verticalScrolling="false" horizontalScrolling="false" id="configChangeEmailTempDia">
+		<OverflowToolbar class="MAPTitle">
+			<Title level="H3" text="Change email content" class="dialogTitle"/>
+		
+		</OverflowToolbar>
+		<l:FixFlex class="fixFlexFixedSize" minFlexSize="5rem" fixContentSize="450px">
+			<l:fixContent >
+				<ScrollContainer height="100%" vertical="true" horizontal="false">
+					<VBox class="activity1">
+						<f:SimpleForm id="changeEmailTempl" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4" adjustLabelSpan="false">
+							<f:content>
+								<Label text="Template Name"/>
+								<TextArea value="" rows="1" width="100%" id="changeEmailTemplType" editable="false"/>
+								<Label text="Language"/>
+								<!--<TextArea value=""  rows="1" width="100%"  editable="false"/>-->
+									<ComboBox id="emailCreateLanguage" editable="false" showSecondaryValues="true" items="{ path: '/results', sorter: { path: 'LANG_CODE' } }">
+									<core:ListItem key="{LANG_CODE}" text="{LANG_CODE} {LANGUAGE}" />
+								</ComboBox>
+							
+								<Label text="Enable"/>
+								<CheckBox id="changeEmailTemplCheck" enabled="true" editable="true"/>
+								
+							</f:content>
+						</f:SimpleForm>
+						<VBox class="feasibilityTextArea1">
+						
+							<Label text="Email Subject"/>
+							<TextArea value="" rows="1" width="100%" id="changeEmailTemplValSubject"/>
+						</VBox>
+						
+						<VBox class="feasibilityTextArea1">
+							<Label text="Email Content"/>
+							<TextArea value="" rows="10" width="100%" id="changeEmailTemplVal2"/>
+						</VBox>
+						
+					</VBox>
+				</ScrollContainer>
+			</l:fixContent>
+			<l:flexContent>
+				<OverflowToolbar height="5rem">
+					<ToolbarSpacer/>
+					<Button text="Cancel" press="onCancelEmailTempl" id="cancelEmailTempl"/>
+					<Button text="Save" press="onchangeEmailTemplSave" id="changeEmailTemplDone"/>
+				</OverflowToolbar>
+			</l:flexContent>
+		</l:FixFlex>
+	</Dialog>
+	
+	
+</core:FragmentDefinition>

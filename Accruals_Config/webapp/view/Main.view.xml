@@ -1,0 +1,67 @@
+<mvc:View controllerName="com.takeda.Accrual_UI5.Accrual_Ctry.controller.CountryConfig" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m" xmlns:tnt="sap.tnt" height="100%" xmlns:core="sap.ui.core" class="side-navigation-demo">
+	<tnt:ToolPage id="toolPage">
+		<tnt:sideContent>
+			<tnt:ToolHeader>
+				<!--<Text text="Configuration List" class="Label" />-->
+				<!--<ObjectStatus-->
+				<!--	text="Some Damaged"-->
+				<!--	state="Error"-->
+				<!--	/>-->
+			</tnt:ToolHeader>
+			<tnt:SideNavigation id="sideNavigation" expanded="true" selectedKey="subItem3" itemSelect="onItemSelect">
+				<!--<Label text="Configuration List" design="Bold" class="Label" />-->
+				<tnt:NavigationList >
+					<tnt:NavigationListItem id="sectio41" expanded="true" text="Configuration List" class="List">
+						<tnt:NavigationListItem id="section1" text="Country and Company Code" key="page1"/>
+						<tnt:NavigationListItem id="section2" text="Configuration Values" key="page2"/>
+						<tnt:NavigationListItem id="section3" text="User Role Config" key="page3"/>
+						<tnt:NavigationListItem id="section4" text="Threshold" key="page4"/>
+						<tnt:NavigationListItem id="section5" text="Languages" key="page5"/>
+						<tnt:NavigationListItem id="section6" text="Email Template" key="page6"/>
+						<tnt:NavigationListItem id="section7" text="Help Links" key="page7"/>
+						<tnt:NavigationListItem id="section8" text="Video Links" key="page8"/>
+					</tnt:NavigationListItem>
+				</tnt:NavigationList>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer" initialPage="page1">
+				<pages>
+					<ScrollContainer id="page1" horizontal="false" vertical="true" height="100%">
+						<Label text="Configure Country and Company Code" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.view.CountryConfigTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page2" horizontal="false" vertical="true" height="100%">
+						<Label text="Configuration Values" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.view.ConfigTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page3" horizontal="false" vertical="true" height="100%">
+						<Label text="User Roles Config" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.view.UserRoleTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page4" horizontal="false" vertical="true" height="100%">
+						<Label text="Threshold" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.view.ThresholdTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page5" horizontal="false" vertical="true" height="100%">
+						<Label text="Language Configuration" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.view.LanguageConfigTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page6" horizontal="false" vertical="true" height="100%">
+						<Label text="Email Template Configuration" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.view.EmailTemplateTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page7" horizontal="false" vertical="true" height="100%">
+						<Label text="Help Links Configuration" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.fragment.HelpLinksTable" type="XML"/>
+					</ScrollContainer>
+					<ScrollContainer id="page8" horizontal="false" vertical="true" height="100%">
+						<Label text="Video Links Configuration" design="Bold" class="Label"/>
+						<core:Fragment fragmentName="com.takeda.Accrual_UI5.Accrual_Ctry.fragment.VideoLinksTable" type="XML"/>
+					</ScrollContainer>
+				</pages>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>

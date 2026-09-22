@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices m:DataServiceVersion="2.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="default" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="exclusionPOType">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="2147483647"/>
+				<Property Name="COSTCENTER" Type="Edm.String" MaxLength="10"/>
+				<Property Name="SUPPLIERNAME" Type="Edm.String" MaxLength="50"/>
+				<Property Name="INTERNALORDER" Type="Edm.String" MaxLength="12"/>
+				<Property Name="COSTCENTERDESC" Type="Edm.String" MaxLength="40"/>
+				<Property Name="POLINEDESC" Type="Edm.String" MaxLength="100"/>
+				<Property Name="ASSETID" Type="Edm.String" MaxLength="12"/>
+				<Property Name="PSTYPE" Type="Edm.String" MaxLength="1"/>
+				<Property Name="REGION" Type="Edm.String" MaxLength="3"/>
+				<Property Name="PROFITCENTER" Type="Edm.String" MaxLength="10"/>
+				<Property Name="POVALUE" Type="Edm.Decimal" Precision="13" Scale="3"/>
+				<Property Name="EPNUMBER" Type="Edm.String" MaxLength="12"/>
+				<Property Name="POCURRENCY" Type="Edm.String" MaxLength="3"/>
+				<Property Name="STATUS" Type="Edm.String" MaxLength="20"/>
+				<Property Name="LASTMONTHWRKCOMP" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="MANAGEUNIT" Type="Edm.String" MaxLength="35"/>
+				<Property Name="WRKSTRTDATE" Type="Edm.DateTime"/>
+				<Property Name="POVALUE_COCO" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="PONUMBER" Type="Edm.String" MaxLength="10"/>
+				<Property Name="COMPANYCODE" Type="Edm.String" MaxLength="4"/>
+				<Property Name="WRKENDDATE" Type="Edm.DateTime"/>
+				<Property Name="COCDECURR" Type="Edm.String" MaxLength="5"/>
+				<Property Name="ITEMNO" Type="Edm.String" MaxLength="5"/>
+				<Property Name="PURCHASINGUNIT" Type="Edm.String" MaxLength="25"/>
+				<Property Name="TOTWRKCOMPAMT" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="GLACCOUNT" Type="Edm.String" MaxLength="10"/>
+				<Property Name="SUPPLIERID" Type="Edm.String" MaxLength="10"/>
+				<Property Name="ACCRUALMETHOD" Type="Edm.String" MaxLength="50"/>
+				<Property Name="TOTWRKCOMPPER" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="GRVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="INVVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="POCREATEDAT" Type="Edm.DateTime"/>
+				<Property Name="STRAIGHTLINEMTHD" Type="Edm.String" MaxLength="1"/>
+				<Property Name="RULETYPE" Type="Edm.String" MaxLength="2"/>
+				<Property Name="RULETYPETEXT" Type="Edm.String" MaxLength="50"/>
+				<Property Name="ZACTIVITYNBR" Type="Edm.String" MaxLength="20"/>
+			</EntityType>
+			<EntityType Name="exclusionPOParametersType">
+				<Key>
+					<PropertyRef Name="IP_EMAIL"/>
+				</Key>
+				<Property Name="IP_EMAIL" Type="Edm.String" Nullable="false" MaxLength="255"/>
+				<NavigationProperty Name="Results" Relationship="default.exclusionPOParameters_to_exclusionPOType" FromRole="exclusionPOParametersPrincipal"
+					ToRole="exclusionPODependent"/>
+			</EntityType>
+			<Association Name="exclusionPOParameters_to_exclusionPOType">
+				<End Type="default.exclusionPOParametersType" Role="exclusionPOParametersPrincipal" Multiplicity="1"/>
+				<End Type="default.exclusionPOType" Role="exclusionPODependent" Multiplicity="*"/>
+			</Association>
+			<EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="exclusionPO" EntityType="default.exclusionPOType"/>
+				<EntitySet Name="exclusionPOParameters" EntityType="default.exclusionPOParametersType"/>
+				<AssociationSet Name="exclusionPOParameters_to_exclusionPO" Association="default.exclusionPOParameters_to_exclusionPOType">
+					<End Role="exclusionPOParametersPrincipal" EntitySet="exclusionPOParameters"/>
+					<End Role="exclusionPODependent" EntitySet="exclusionPO"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

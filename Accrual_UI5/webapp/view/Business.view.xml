@@ -1,0 +1,27 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.takeda.Accrual_UI5.controller.Business"
+	xmlns:html="http://www.w3.org/1999/xhtml" class="sapUiSizeCompact">
+	<App>
+		<pages>
+			<Page title="Title" showHeader="false" class="pageBackground">
+				<content>
+					<IconTabBar id="mainTabs" expandable="false" select="onSelectMainTabs" class="mainTabs">
+						<items>
+							<IconTabFilter id="DashboardTab" text="{i18n>Dashboard}" key="DashboardTab">
+								<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.dashboard" type="XML"/>
+							</IconTabFilter>
+							<IconTabFilter id="helpTab" text="{i18n>Help}" key="worklhelpTabistTab">
+								<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.help" type="XML"/>
+							</IconTabFilter>
+							<IconTabFilter id="linkTab" text="{i18n>link}" key="linkTab">
+								<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.link" type="XML"/>
+							</IconTabFilter>
+							<IconTabFilter id="VideoTab" text="{i18n>VideoLink}" key="VideoTab">
+								<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.Videos" type="XML"/>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

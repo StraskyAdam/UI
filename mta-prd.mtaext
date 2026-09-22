@@ -1,0 +1,7 @@
+_schema-version: '3.1.0'
+ID: Accrual
+extends: Accrual
+resources:
+  - name: uaa_Accrual
+    parameters:
+      path: ./xs-security-prd.json

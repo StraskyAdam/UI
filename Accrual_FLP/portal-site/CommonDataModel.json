@@ -1,0 +1,92 @@
+{
+	"_version": "3.0.0",
+	"identification": {
+		"id": "9e6fb0e4-b4ae-4380-abbf-0067c31bce61-1620724885537",
+		"entityType": "bundle"
+	},
+	"payload": {
+		"catalogs": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultCatalogId",
+				"title": "{{title}}",
+				"entityType": "catalog",
+				"i18n": "i18n/defaultCatalogId.properties"
+			},
+			"payload": {
+				"viz": [{
+					"appId": "com.takeda.ACCRUAL_ShellPlugin",
+					"vizId": "Shell-plugin"
+				}]
+			}
+		}],
+		"groups": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultGroupId",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/defaultGroupId.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "com.takeda.Accrual_UI5-0-1649503103796",
+					"appId": "com.takeda.Accrual_UI5",
+					"vizId": "Accrual-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "admin",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/admin.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "com.takeda.Accrual_UI5.Accrual_Ctry-0-1649503103796",
+					"appId": "com.takeda.Accrual_UI5.Accrual_Ctry",
+					"vizId": "ConfigTile-read"
+				}]
+			}
+		}],
+		"sites": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "1913208e-91ba-496f-8034-1bb603d11b11-1620724885537",
+				"entityType": "site",
+				"title": "SAP Fiori launchpad site on Cloud Foundry",
+				"description": "SAP Fiori launchpad site on Cloud Foundry, deployed from SAP Web IDE"
+			},
+			"payload": {
+				"config": {
+					"ushellConfig": {
+						"renderers": {
+							"fiori2": {
+								"componentData": {
+									"config": {
+										"applications": {
+											"Shell-home": {}
+										},
+										"enableSearch": false,
+										"enablePersonalization": true,
+										"enableSetTheme": true,
+										"enableSetLanguage": true
+									}
+								}
+							}
+						}
+					}
+				},
+				"groupsOrder": ["defaultGroupId", "admin"],
+				"sap.cloud.portal": {
+					"config": {
+						"theme.id": "edge_accruals_4",
+						"theme.active": ["edge_accruals_4", "sap_fiori_3", "sap_fiori_3_dark", "sap_quartz_light", "sap_quartz_dark", "sap_horizon_light", "sap_horizon_dark"]
+					}
+				}
+			}
+		}]
+	}
+}

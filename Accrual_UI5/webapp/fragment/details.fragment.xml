@@ -1,0 +1,162 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:grid="sap.ui.layout.cssgrid" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:mc="sap.suite.ui.microchart" class="sapUiSizeCompact"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data">
+	<Dialog showHeader="false" contentHeight="auto" contentWidth="90rem" id="cdialog">
+		<OverflowToolbar height="8rem">
+			<VBox>
+				<Text text=" "/>
+				<Text text="{i18n>details}" class="detPoHeading"/>
+				<Text text=" "/>
+				<HBox>
+					<Text id="detpo" class="detPosubhead"/>
+					<Text text=" " width="50rem"/>
+					<Link text="{i18n>ariba}" id="ariba" target="_blank"/>
+				</HBox>
+			</VBox>
+		</OverflowToolbar>
+		<VBox>
+			<Text text=" "/>
+			<Text text="{i18n>standardPO}" class="detHeading"/>
+			<Text text=" "/>
+		</VBox>
+		<grid:CSSGrid id="grid1" gridTemplateColumns="repeat(4,minmax(40px, 2fr))" gridGap="1rem">
+			<VBox>
+				<Label text="{i18n>supplierId}" class="detsubhead"/>
+				<Text id="detsupid" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>supplierName}" class="detsubhead"/>
+				<Text id="detsupn" class="detvalues"></Text>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>AccrualPO}" class="detsubhead"/>
+				<Text id="detaccpo" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>POvalue}" class="detsubhead"/>
+				<Text id="detpo1" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>AccrualCC}" class="detsubhead"/>
+				<Text id="detaccCC" class="detvalues"/>
+			</VBox>
+		</grid:CSSGrid>
+		<VBox>
+			<Text text=" "/>
+			<Text text="{i18n>recipient}" class="detHeading"/>
+			<Text text=" "/>
+		</VBox>
+		<grid:CSSGrid id="grid2" gridTemplateColumns="repeat(4,minmax(40px, 2fr))" gridGap="1rem">
+			<VBox>
+				<Label text="{i18n>Companycode}" class="detsubhead"/>
+				<Text id="detcc" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>Company}" class="detsubhead"/>
+				<Text id="detcn" class="detvalues"></Text>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>purchasinggroup}" class="detsubhead"/>
+				<Text id="detpurgrp" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>purchasingorganisation}" class="detsubhead"/>
+				<Text id="detpurorg" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>reviewed}" class="detsubhead"/>
+				<Text id="detrew" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>invoiceprocessed}" class="detsubhead"/>
+				<Text id="detinvpro" class="detvalues"/>
+			</VBox>
+		</grid:CSSGrid>
+		<VBox>
+			<Text text=" "/>
+			<Text text="{i18n>purchase}" class="detHeading"/>
+			<Text text=" "/>
+		</VBox>
+		<grid:CSSGrid id="grid3" gridTemplateColumns="repeat(4,minmax(40px, 2fr))" gridGap="1rem">
+			<VBox>
+				<Label text="{i18n>lineDesc}" class="detsubhead"/>
+				<Text id="detld" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>POvalue}" class="detsubhead"/>
+				<Text id="detpo2" class="detvalues"></Text>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>lineItem}" class="detsubhead"/>
+				<Text id="detli" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>WorkStart}" class="detsubhead"/>
+				<Text id="detws" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>WorkEnd}" class="detsubhead"/>
+				<Text id="detwe" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>Amount}" class="detsubhead"/>
+				<Text id="detA" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>percent}" class="detsubhead"/>
+				<Text id="detP" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>lastMonth}" class="detsubhead"/>
+				<Text id="detlm" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>Invoice}" class="detsubhead"/>
+				<Text id="detinv" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>AmountTo}" class="detsubhead"/>
+				<Text id="detamtto" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>invdate}" class="detsubhead"/>
+				<Text id="detinvdate" class="detvalues"/>
+			</VBox>
+				<VBox>
+				<Label text="{i18n>createdon}" class="detsubhead"/>
+				<Text id="detcreadate" class="detvalues"/>
+			</VBox>
+			<VBox>
+				<Label text="{i18n>activitynumber}" class="detsubhead"/>
+				<Text id="detactnr" class="detvalues"/>
+			</VBox>
+		</grid:CSSGrid>
+		<Text text=" "/>
+		<FlexBox height="570px" width="1170px" renderType="Bare">
+			<items>
+				<viz:VizFrame id="idVizFrame" height='100%' width="100%" vizType='line'
+					vizProperties="{general:{layout:{padding:'10'},background:{border:{stroke:'#FFFFFF'}}},plotArea: {drawingEffect: 'normal',dataLabel: {type:'value'},'colorPalette': ['#EA5532','#E19F00','#51B1BF'] }, title:{ text:'PO Work Completed and Invoiced Data'},tooltip:{visible:'true'}}">
+					<viz:dataset>
+						<viz.data:FlattenedDataset data="{lineData>/}">
+							<viz.data:dimensions>
+								<viz.data:DimensionDefinition name="Months" value="{Week}"/>
+							</viz.data:dimensions>
+							<viz.data:measures>
+								<viz.data:MeasureDefinition name="Current Month Invoice" value="{invValueGraph}"/>
+								<viz.data:MeasureDefinition name="Current Month Services Completed Amount" value="{workComGraph}"/>
+								<viz.data:MeasureDefinition name="Straight Line work completed" value="{stLineGraph}"/>
+							</viz.data:measures>
+						</viz.data:FlattenedDataset>
+					</viz:dataset>
+					<viz:feeds>
+						<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Current Month Invoice,Current Month Services Completed Amount,Straight Line work completed"/>
+						<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Months"/>
+					</viz:feeds>
+				</viz:VizFrame>
+			</items>
+		</FlexBox>
+		<beginButton>
+			<Button text="{i18n>close}" press="onDetCancel"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

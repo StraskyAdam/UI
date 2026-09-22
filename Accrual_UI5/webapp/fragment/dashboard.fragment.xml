@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:mc="sap.suite.ui.microchart" class="sapUiSizeCompact">
+	<HBox class="dashboardHBox">
+		<Label text="{i18n>Dashboard}" design="Bold" class="dashboard"/>
+		<Text text="{i18n>InthisTilePO}" class="detsubhead"/>
+	</HBox>
+	<HBox class="toolbarM">
+		<Label text="{i18n>Openworklist}" design="Bold" class="margintop"/>
+		<Text id="presentMon" class="margintop" width="10rem"/>
+		<ToolbarSpacer width="26rem"/>
+		<VBox class="BulletMicroChartVBox">
+			<HBox>
+				<Text id="startDate" class="timeline bold" width="3.5rem"/>
+				<Text id="cutOffDate" class="timeline bold" width="16rem"/>
+				<Text id="endDate" class="timeline bold"/>
+			</HBox>
+			<mc:BulletMicroChart id="bulletMicroTimeline" tooltip=" " minValue="1" height="22px" width="35rem" class="BulletMicroChart">
+				<mc:actual>
+					<mc:BulletMicroChartData id="bulletValue" color="Neutral"/>
+				</mc:actual>
+				<mc:thresholds>
+					<mc:BulletMicroChartData tooltip=" " value="1" color="Good"/>
+					<mc:BulletMicroChartData tooltip=" " value="7" color="Error"/>
+					<mc:BulletMicroChartData tooltip=" " value="31" color="Critical"/>
+				</mc:thresholds>
+			</mc:BulletMicroChart>
+			<HBox>
+				<Text text="" class="timeline bold" width="2.8rem"/>
+				<Text text="{i18n>reviewstarts}" class="timeline bold" width="16.6rem"/>
+				<Text text="{i18n>cutoff}" class="timeline bold"/>
+			</HBox>
+		</VBox>
+	</HBox>
+	<HBox id="dashboardBox"></HBox>
+	<VBox></VBox>
+	<HBox alignItems="Start" justifyContent="End" class="POLink" >
+		<Link text="{i18n>invoiceTrack}" target="_blank" emphasized="true" href="{oExternalLinks>/sInvoiceTrack}"
+			class="sapUiSmallMarginEnd sapUiTinyMarginTop"/>
+		<Link text="{i18n>poDepletionReport}" target="_blank" emphasized="true" href="{oExternalLinks>/sPoDepletionReport}"
+			class="sapUiSmallMarginEnd sapUiTinyMarginTop"/>
+		<Button id="emailExcelButton" text="{i18n>emailExcelReport}" icon="sap-icon://excel-attachment" press="onPressEmailExcelButton"
+			class="sapUiSmallMarginEnd emailExcelButton"/>
+	</HBox>
+	<VBox>
+		<IconTabBar id="DashTabs" expandable="false" select="onSelectDashTabs" class="DashTabs">
+			<items>
+				<IconTabFilter id="actUponTab" core:require="{ formatMessage: 'sap/base/strings/formatMessage' }"
+					text="{ parts: [ 'i18n>actUpon', 'tableCountModel>/PoOver50' ], formatter: 'formatMessage' }" key="actUponTab">
+					<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.actUpon" type="XML"/>
+				</IconTabFilter>
+				<IconTabFilter id="thresholdTab" core:require="{ formatMessage: 'sap/base/strings/formatMessage' }"
+					text="{ parts: [ 'i18n>threshold', 'tableCountModel>/PoUnder50' ], formatter: 'formatMessage'}" key="thresholdTab">
+					<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.thresholdTab" type="XML"/>
+				</IconTabFilter>
+				<IconTabFilter id="infoTab" core:require="{ formatMessage: 'sap/base/strings/formatMessage' }"
+					text="{ parts: [ 'i18n>info', 'tableCountModel>/PoInformation' ], formatter: 'formatMessage' }" key="infoTab">
+					<customData>
+						<core:CustomData key="myTextColor" value="green" writeToDom="true"/>
+					</customData>
+					<core:Fragment fragmentName="com.takeda.Accrual_UI5.fragment.infoTab" type="XML"/>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+	</VBox>
+</core:FragmentDefinition>

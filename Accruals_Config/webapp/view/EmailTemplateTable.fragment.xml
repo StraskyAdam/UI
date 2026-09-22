@@ -1,0 +1,46 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core">
+	<m:OverflowToolbar>
+	
+		<m:SearchField liveChange="onSearchEmailTemplateConfig" placeholder="Search" width="32%"/>
+
+		<m:ToolbarSpacer width="12.5%"/>
+		<m:Button id="button15" text="Create" type="Reject" press="onPressEmailTemplateCreate" class="savebtn"/>
+		<m:Button id="button17" text="Change" press="onPressEmailTemplateChange" class="cancelbtn"/>
+		<m:Button id="button16" text="Delete" press="onPressEmailTemplateDelete" class="cancelbtn"/>
+	</m:OverflowToolbar>
+	<Table rows="{path: '/results'}" id="emailTemplateTable" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange="actionEmailTempl">
+		<columns>
+			<Column width="auto">
+				<m:Label text="Template Name" design="Bold"/>
+				<template>
+					<m:Text text="{TEMPLATE_NAME}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Language" design="Bold"/>
+				<template>
+					<m:Text text="{LANGUAGE}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Subject" design="Bold"/>
+				<template>
+					<m:Text text="{SUBJECT}" wrapping="false"/>
+				</template>
+			</Column>
+			
+			<Column width="auto">
+				<m:Label text="Body" design="Bold"/>
+				<template>
+					<m:Text text="{BODY}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Enabled" design="Bold"/>
+				<template>
+				   <m:CheckBox selected="{= ${STATUS}==='X'}" editable="false"/>
+				</template>
+			</Column>
+		</columns>
+	</Table>
+</core:FragmentDefinition>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices m:DataServiceVersion="2.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="default" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="thresholdType">
+				<Key>
+					<PropertyRef Name="PONUMBER"/>
+					<PropertyRef Name="ITEMNO"/>
+				</Key>
+				<Property Name="EPNUMBER" Type="Edm.String" MaxLength="12"/>
+				<Property Name="GLACCOUNT" Type="Edm.String" MaxLength="5000"/>
+				<Property Name="POCURRENCY" Type="Edm.String" MaxLength="3"/>
+				<Property Name="COSTCENTER" Type="Edm.String" MaxLength="5000"/>
+				<Property Name="MANAGEUNIT" Type="Edm.String" MaxLength="35"/>
+				<Property Name="WRKSTRTDATE" Type="Edm.DateTime"/>
+				<Property Name="PONUMBER" Type="Edm.String" MaxLength="10"/>
+				<Property Name="WRKENDDATE" Type="Edm.DateTime"/>
+				<Property Name="ITEMNO" Type="Edm.String" MaxLength="5"/>
+				<Property Name="SUPPLIERID" Type="Edm.String" MaxLength="10"/>
+				<Property Name="COMPANYCODE" Type="Edm.String" MaxLength="4"/>
+				<Property Name="SUPPLIERNAME" Type="Edm.String" MaxLength="50"/>
+				<Property Name="INTERNALORDER" Type="Edm.String" MaxLength="12"/>
+				<Property Name="PURCHASINGUNIT" Type="Edm.String" MaxLength="25"/>
+				<Property Name="POLINEDESC" Type="Edm.String" MaxLength="100"/>
+				<Property Name="ASSETID" Type="Edm.String" MaxLength="12"/>
+				<Property Name="REGION" Type="Edm.String" MaxLength="3"/>
+				<Property Name="PSTYPE" Type="Edm.String" MaxLength="1"/>
+				<Property Name="PROFITCENTER" Type="Edm.String" MaxLength="10"/>
+				<Property Name="COCDECURR" Type="Edm.String" MaxLength="5"/>
+				<Property Name="STATUS" Type="Edm.String" MaxLength="20"/>
+				<Property Name="ACCRUALMETHOD" Type="Edm.String" MaxLength="50"/>
+				<Property Name="POCREATEDAT" Type="Edm.DateTime"/>
+				<Property Name="STRAIGHTLINEMTHD" Type="Edm.String" MaxLength="1"/>
+				<Property Name="POOWNER_EMAIL" Type="Edm.String" MaxLength="255"/>
+				<Property Name="MARKASREVIEWED" Type="Edm.String" MaxLength="1"/>
+				<Property Name="CHANGEDDATE" Type="Edm.DateTime"/>
+				<Property Name="REVIWED_BY" Type="Edm.String" MaxLength="225"/>
+				<Property Name="USERNAME" Type="Edm.String" MaxLength="12"/>
+				<Property Name="FULL_NAME" Type="Edm.String" MaxLength="80"/>
+				<Property Name="DECIMAL_FORMAT" Type="Edm.String" MaxLength="1"/>
+				<Property Name="DATFM" Type="Edm.String" MaxLength="1"/>
+				<Property Name="AMOUNTACCRUED" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="AMOUNTACCRUED_COCDECURR" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="GRVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="POVALUE_COCO" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="TOTWRKCOMPAMT" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="TOTWRKCOMPPER" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="POVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="LASTMONTHWRKCOMP" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="EDGEWTDAMT" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="TOTWRKCOMPAMT_COCDECURR" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="INVVALUE_COCDECURR" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="GRVALUE_COCDECURR" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="INVVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+				<Property Name="CHANGEDTIME" Type="Edm.Time"/>
+				<Property Name="ZACTIVITYNBR" Type="Edm.String" MaxLength="20"/>
+			</EntityType>
+			<EntityType Name="thresholdParametersType">
+				<Key>
+					<PropertyRef Name="IP_PSTYPE"/>
+					<PropertyRef Name="IP_EMAIL"/>
+				</Key>
+				<Property Name="IP_PSTYPE" Type="Edm.String" Nullable="false" MaxLength="1"/>
+				<Property Name="IP_EMAIL" Type="Edm.String" Nullable="false" MaxLength="255"/>
+				<NavigationProperty Name="Results" Relationship="default.thresholdParameters_to_thresholdType" FromRole="thresholdParametersPrincipal"
+					ToRole="thresholdDependent"/>
+			</EntityType>
+			<Association Name="thresholdParameters_to_thresholdType">
+				<End Type="default.thresholdParametersType" Role="thresholdParametersPrincipal" Multiplicity="1"/>
+				<End Type="default.thresholdType" Role="thresholdDependent" Multiplicity="*"/>
+			</Association>
+			<EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="threshold" EntityType="default.thresholdType"/>
+				<EntitySet Name="thresholdParameters" EntityType="default.thresholdParametersType"/>
+				<AssociationSet Name="thresholdParameters_to_threshold" Association="default.thresholdParameters_to_thresholdType">
+					<End Role="thresholdParametersPrincipal" EntitySet="thresholdParameters"/>
+					<End Role="thresholdDependent" EntitySet="threshold"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

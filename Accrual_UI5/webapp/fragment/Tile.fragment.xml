@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	controllerName="com.takeda.Accrual_UI5.controller.Main">
+	<VBox class="tile-page">
+		<!--<MessageStrip visible="false" text="" type="Information" showIcon="true" class="msgStrip sapUiLargeMarginBottom"></MessageStrip>-->
+		<Panel class="msgStripTile">
+			<content>
+				<VBox>
+					<HBox class="msgBox">
+						<MessageStrip visible="false" text="" type="Information" showIcon="true" class="msgStrip sapUiLargeMarginBottom"></MessageStrip>
+						<core:Icon src="sap-icon://message-information" class=" color1 sapUiTinyMarginEnd"/>
+						<Label design="Bold" text="How to log in to Digital Accruals -" class="color1"/>
+						<HBox class="msgBox1">
+							<Link id="ReferenceLink" text="Logon Tutorial" class="color sapUiSmallMarginBegin sapUiTinyMarginBegin sapUiTinyMarginEnd" target="_blank"
+								press="onLinkPress"/>
+						</HBox>
+					</HBox>
+				</VBox>
+			</content>
+		</Panel>
+		<HBox>
+			<GenericTile id="BuisnessTile" class="sapUiSmallMarginEnd generic-tile1" header="{i18n>BuisnessTile}" frameType="TwoByOne"
+				press="onBusinessPage">
+				<tileContent>
+					<TileContent>
+						<content>
+							<Avatar src="sap-icon://activity-items" class="tile-icon"/>
+						</content>
+					</TileContent>
+				</tileContent>
+			</GenericTile>
+			<GenericTile id="TBSTile" header="{i18n>TBSTile}" class="generic-tile2" frameType="TwoByOne" press="onTBSTilePage">
+				<tileContent>
+					<TileContent>
+						<content>
+							<Avatar src="sap-icon://task" class="tile-icon"/>
+						</content>
+					</TileContent>
+				</tileContent>
+			</GenericTile>
+		</HBox>
+	</VBox>
+</core:FragmentDefinition>

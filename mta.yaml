@@ -1,0 +1,137 @@
+ID: Accrual
+_schema-version: 3.1.0
+parameters:
+  deploy_mode: html5-repo
+version: 1.0.0
+modules:
+  - name: accrual-approuter
+    type: approuter.nodejs
+    path: accrual-approuter
+    parameters:
+      buildpack: nodejs_buildpack
+      stack: cflinuxfs4
+      disk-quota: 1024M
+      memory: 1024M
+      instances: 4
+    requires:
+      - name: Accrual_html5_repo_runtime
+      - name: portal_resources_Accrual
+      - name: Accrual-theming
+      - name: uaa_Accrual
+      - name: dest_Accrual
+      - name: conn_Accrual
+    properties:
+      CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"<sac-host>", "protocol":"https"}], "allowedMethods": ["GET", "POST", "OPTIONS"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
+      COOKIES: '{"SameSite": "Lax"}'
+      INCOMING_CONNECTION_TIMEOUT: 600000
+      TENANT_HOST_PATTERN: '^(.*)-<space>-haa.cfapps.(.*).hana.ondemand.com'
+      SECURE_SESSION_COOKIE: true
+      httpHeaders: '[{ "X-Content-Type-Options": "nosniff" },{"X-XSS-Protection": "1;mode=block"},{"Cache-Control": "no-cache, no-store, must-revalidate"}]'
+  - name: Accrual_ui_deployer
+    type: com.sap.html5.application-content
+    path: Accrual_ui_deployer
+    parameters:
+      stack: cflinuxfs4  
+    requires:
+      - name: Accrual_html5_repo_host
+    build-parameters:
+      requires:
+        - name: Accrual_UI5
+          artifacts:
+            - './*'
+          target-path: resources/Accrual_UI5
+        - name: Accruals_Config
+          artifacts:
+            - './*'
+          target-path: resources/Accruals_Config
+        - name: ACCRUAL_ShellPlugin
+          artifacts:
+            - './*'
+          target-path: resources/ACCRUAL_ShellPlugin
+  - name: Accrual_UI5
+    type: html5
+    path: Accrual_UI5
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+      build-result: dist
+    requires:
+      - name: dest_Accrual
+        group: destinations
+        properties:
+          timeout: 240000
+  - name: Accrual_FLP
+    type: com.sap.application.portal.content
+    path: Accrual_FLP
+    parameters:
+      stack: cflinuxfs4
+    requires:
+      - name: portal_resources_Accrual
+        parameters:
+          service-key:
+            name: content-deploy-key
+            config:
+              content-endpoint: developer
+          content-target: true
+      - name: uaa_Accrual
+      - name: Accrual_html5_repo_host
+      - name: Accrual_ui_deployer
+  - name: Accruals_Config
+    type: html5
+    path: Accruals_Config
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+      build-result: dist
+  - name: ACCRUAL_ShellPlugin
+    type: html5
+    path: ACCRUAL_ShellPlugin
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: Accrual_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: Accrual_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: uaa_Accrual
+    parameters:
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_Accrual
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: portal_resources_Accrual
+    parameters:
+      service-plan: standard
+      service: portal
+    type: org.cloudfoundry.managed-service
+  - name: conn_Accrual
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: connectivity
+  - name: Accrual-theming
+    parameters:
+      service-plan: standard
+      service: theming
+    type: org.cloudfoundry.managed-service
