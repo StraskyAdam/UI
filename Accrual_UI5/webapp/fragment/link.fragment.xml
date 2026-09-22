@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:grid="sap.ui.layout.cssgrid" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:mc="sap.suite.ui.microchart" class="sapUiSizeCompact"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data">
+	<Text text="{i18n>linkTitle}" class="errorMsg"/>
+	<Table id="linkTable" width="98.6%" visible="false" itemPress="onItemPress" items="{path: 'refLinkModel>/'}" class="table111" inset="false" growing="true"
+		growingThreshold="10" selectionChange="onSelection" mode="None">
+		<columns>
+			<Column hAlign="Left" width="25rem">
+				<Text text="{i18n>rTitle}" class="tileSubText2"/>
+			</Column>
+			<Column hAlign="Left">
+				<Text text="{i18n>rLink}" class="tileSubText2"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{refLinkModel>HELP_DESC}"/>
+					<Link text="Link" href="{refLinkModel>HELP_LINK}" target="_blank"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

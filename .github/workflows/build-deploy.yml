@@ -1,0 +1,161 @@
+name: "Build and Deploy"
+
+on:
+  push:
+    branches:
+      - develop-run
+      - develop-impl
+      - validation
+  workflow_dispatch:
+
+env:
+  APP_NAME: edge-accurals-ui
+  CF_API: https://api.cf.eu10.hana.ondemand.com
+  CF_ORG: EDGE_ACCRUALS_NON_PROD
+  CF_SPACE: Dev
+  MTA: dev
+  CAN_PUBLISH_ARTIFACTS: false
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # set a timestamp for use in the build
+      - name: Set TIMESTAMP variable
+        id: date
+        run: |
+          timedatectl
+          echo "TIMESTAMP=$(date -u +'%m-%d-%Y-%H-%M')" >> $GITHUB_ENV
+
+      # set branch name var
+      - name: Set BRANCH variable
+        run: echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        
+      - name: workflow permission
+        if: endsWith(github.ref, 'main')
+        uses: 74th/workflow-permission-action@1.0.0        
+        with:
+          users: RadovanNieslanik,AhamadZameer,lee-zandro-trazo,rodneycunanan,mariamichelledelgadotakeda,RenzCoria
+        
+      # Set CF memory, disk-quota and instances based on environment
+      - name: Set CF memory, disk-quota and instances for DEV Space
+        if: endsWith(github.ref, 'develop-run') || endsWith(github.ref, 'develop-impl')
+        run: |
+          sed -i 's/disk-quota: 1024M/disk-quota: 256M/' mta.yaml
+          sed -i 's/memory: 1024M/memory: 256M/' mta.yaml
+          sed -i 's/instances: 4/instances: 4/' mta.yaml
+      
+      - name: Set CF memory, disk-quota and instances for QTY Space
+        if: endsWith(github.ref, 'validation')
+        run: |
+          sed -i 's/disk-quota: 1024M/disk-quota: 512M/' mta.yaml
+          sed -i 's/memory: 1024M/memory: 512M/' mta.yaml
+          sed -i 's/instances: 4/instances: 6/' mta.yaml
+          
+      - name: Set CF memory, disk-quota and instances for PRD Space
+        if: endsWith(github.ref, 'main')
+        run: |
+          sed -i 's/disk-quota: 1024M/disk-quota: 512M/' mta.yaml
+          sed -i 's/memory: 1024M/memory: 512M/' mta.yaml
+          sed -i 's/instances: 4/instances: 20/' mta.yaml
+          
+
+      # set environment based vars
+      - name: Set CF_SPACE variable to testing
+        if: endsWith(github.ref, 'validation')
+        run: |
+          echo "CF_SPACE=Qty" >> $GITHUB_ENV
+          echo "MTA=qty" >> $GITHUB_ENV
+
+      - name: Set CF_SPACE variable to production
+        if: endsWith(github.ref, 'main')
+        run: |
+          echo "CF_ORG=EDGE_ACCRUALS" >> $GITHUB_ENV
+          echo "CF_SPACE=Prd" >> $GITHUB_ENV
+          echo "MTA=prd" >> $GITHUB_ENV
+          
+      - name: Set CAN_PUBLISH_ARTIFACTS variable
+        if: endsWith(github.ref, 'validation') || endsWith(github.ref, 'main')
+        run: echo "CAN_PUBLISH_ARTIFACTS=true" >> $GITHUB_ENV
+
+      # set mtar filename and filepath env vars
+      - name: Set mtar filename variable
+        run: echo "MTAR_FILENAME=${BRANCH}-${TIMESTAMP}-${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ID}.mtar" >> $GITHUB_ENV
+      
+      - name: Set mtar filepath variable
+        run: echo "MTAR_FILEPATH=./mta_archives/${MTAR_FILENAME}" >> $GITHUB_ENV
+        
+      - name: Set tag variable
+        run: echo "TAG_NAME=${BRANCH}-${TIMESTAMP}-${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ID}" >> $GITHUB_ENV
+
+      # debugging tasks
+      - run: pwd
+        name: "[DEBUG] Show current working directory"
+      - run: ls -al
+        name: "[DEBUG] Show current directory files and directories"
+      - run: printenv | sort
+        name: "[DEBUG] Show environment variables"
+      - name: "[DEBUG] Show mtar filepath"
+        run: echo "MTAR_FILEPATH=${{ env.MTAR_FILEPATH }}"
+      - name: "[DEBUG] Show branch"
+        run: git branch
+      - name: Display mta.yaml file
+        run: cat mta.yaml
+
+
+      # setup node
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      # install mbt
+      - name: Install MBT build tool
+        run: npm install -g mbt
+
+      # build
+      - name: Build
+        run: mbt build -p=cf --mtar=${{ env.MTAR_FILENAME }}
+
+      - run: ls -al
+        name: "[DEBUG] Show current directory files and directories"
+
+      - name: "[DEBUG] Display artifact dir"
+        run: |
+          echo "ls -alh  ${{ env.MTAR_FILEPATH }}"
+          ls -alh  ${{ env.MTAR_FILEPATH }}
+          
+      # store artifacts
+      - name: Setup JFrog CLI
+        if: env.CAN_PUBLISH_ARTIFACTS == 'true'
+        uses: jfrog/setup-jfrog-cli@v4
+
+      - name: JFrog Actions
+        if: env.CAN_PUBLISH_ARTIFACTS == 'true'
+        run: |
+          jfrog config add --artifactory-url="https://takedaawsuseast.jfrog.io/artifactory/" --user='${{ secrets.EDGE_JFROG_USER }}' --password='${{ secrets.EDGE_JFROG_PASSWORD }}'
+          jfrog rt upload "${MTAR_FILEPATH}" "edge-generic-local/${APP_NAME}/" --build-name="${GITHUB_WORKFLOW}" --build-number="${GITHUB_RUN_ID}"
+      
+      # deploy
+      - name: 'Deploy'
+        uses: oneTakeda/Edge-Admins-cf-cli-8@v2
+        with:
+          cf_api: ${{ env.CF_API }}
+          cf_username: ${{ secrets.EDGE_CF_USERNAME }}
+          cf_password: ${{ secrets.EDGE_CF_PASSWORD }}
+          cf_org: ${{ env.CF_ORG }}
+          cf_space: ${{ env.CF_SPACE }}
+          command: |
+            install-plugin https://github.com/cloudfoundry/multiapps-cli-plugin/releases/download/v3.4.1/multiapps-plugin.linux64 -f && \
+            cf deploy ${{ env.MTAR_FILEPATH }} -e mta-${{ env.MTA }}.mtaext --version-rule ALL -f
+            
+      # tag
+      - name: tag action
+        run: |
+         git config user.name github-actions
+         git config user.email github-actions@github.com
+         git tag -a ${{ env.TAG_NAME }} -m "creating tag: ${{ env.TAG_NAME }}"
+         git push --tags

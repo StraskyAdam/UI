@@ -1,0 +1,420 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "com.takeda.Accrual_UI5",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"intent1": {
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"semanticObject": "Accrual",
+					"action": "display",
+					"title": "{{TileTitle}}",
+					"icon": "sap-icon://money-bills"
+				}
+			}
+		},
+		"dataSources": {
+			"exclusionPO.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/exclusionPO.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/exclusionPO.xsodata/metadata.xml"
+				}
+			},
+			"dashboard.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/dashboard.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/dashboard.xsodata/metadata.xml"
+				}
+			},
+			"accrualMethod.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/accrualMethod.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/accrualMethod.xsodata/metadata.xml"
+				}
+			},
+			"openOwnerPO.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/openOwnerPO.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"readCtryConfig.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/readCtryConfig.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/readCtryConfig.xsodata/metadata.xml"
+				}
+			},
+			"userDetails.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/userDetails.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/userDetails.xsodata/metadata.xml"
+				}
+			},
+			"readConfigValues.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/readConfigValues.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/readConfigValues.xsodata/metadata.xml"
+				}
+			},
+			"userRole.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/userRole.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/userRole.xsodata/metadata.xml"
+				}
+			},
+			"auditLog.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/auditLog.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/auditLog.xsodata/metadata.xml"
+				}
+			},
+			"thresholdPO.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/thresholdPO.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/thresholdPO.xsodata/metadata.xml"
+				}
+			},
+			"userRoleID.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/userRoleID.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/userRoleID.xsodata/metadata.xml"
+				}
+			},
+			"Z_EDGE_ACCRUALS_SRV": {
+				"uri": "/sap/opu/odata/sap/Z_EDGE_ACCRUALS_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/Z_EDGE_ACCRUALS_SRV/metadata.xml"
+				}
+			},
+			"helpLinks.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/helpLinks.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/helpLinks.xsodata/metadata.xml"
+				}
+			},
+			"cutOffTime.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/cutOffTime.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/cutOffTime.xsodata/metadata.xml"
+				}
+			},
+			"videolinks.xsodata": {
+				"uri": "/XSA_HTTP_ACCRUAL/xsodata/videolinks.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/videolinks.xsodata/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "com.takeda.Accrual_UI5.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "App"
+		},
+		"dependencies": {
+			"minUI5Version": "1.65.6",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.takeda.Accrual_UI5.i18n.i18n"
+				}
+			},
+			"excludedPOModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "exclusionPO.xsodata",
+				"preload": true
+			},
+			"dashboardModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "dashboard.xsodata",
+				"preload": true
+			},
+			"accrualMethodModel": {
+				"type": "sap.ui.model.odata.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "accrualMethod.xsodata",
+				"preload": true
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "InlineRepeat",
+					"useBatch": true
+				},
+				"dataSource": "openOwnerPO.xsodata",
+				"preload": true
+			},
+			"allPO": {
+				"type": "sap.ui.model.odata.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "openOwnerPO.xsodata",
+				"preload": true
+			},
+			"ctryConfig": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "readCtryConfig.xsodata",
+				"preload": true
+			},
+			"userDetails": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"useBatch": true
+				},
+				"dataSource": "userDetails.xsodata",
+				"preload": true
+			},
+			"config": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "readConfigValues.xsodata",
+				"preload": true
+			},
+			"userRoleModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "userRole.xsodata",
+				"preload": true
+			},
+			"auditModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "auditLog.xsodata",
+				"preload": true
+			},
+			"thresholdModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "InlineRepeat",
+					"useBatch": true
+				},
+				"dataSource": "thresholdPO.xsodata",
+				"preload": true
+			},
+			"userRoleFlagModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "userRoleID.xsodata",
+				"preload": true
+			},
+			"oECCIDocCreateModel": {
+				"type": "sap.ui.model.odata.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "Z_EDGE_ACCRUALS_SRV",
+				"preload": true
+			},
+			"helpLinkModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "helpLinks.xsodata",
+				"preload": true
+			},
+			"cutOffModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "cutOffTime.xsodata",
+				"preload": true
+			},
+			"videolinkModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "videolinks.xsodata",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "com.takeda.Accrual_UI5.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "App",
+					"pattern": "App",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"App"
+					]
+				},
+				{
+					"name": "RouteMain",
+					"pattern": "RouteMain",
+					"target": [
+						"TargetMain"
+					]
+				},
+				{
+					"name": "BusinessPage",
+					"pattern": "BusinessPage",
+					"target": "Business"
+				},
+				{
+					"name": "TBSPage",
+					"pattern": "TBSPage",
+					"target": "TBS"
+				}
+			],
+			"targets": {
+				"TargetMain": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Main",
+					"viewName": "Main"
+				},
+				"Business": {
+					"viewType": "XML",
+					"viewName": "Business"
+				},
+				"TBS": {
+					"viewType": "XML",
+					"viewName": "TBS"
+				},
+				"App": {
+					"viewType": "XML",
+					"viewName": "App",
+					"viewId": "App"
+				}
+			}
+		}
+	},
+	"sap.platform.cf": {
+		"oAuthScopes": [
+			"$XSAPPNAME.write",
+			"$XSAPPNAME.admin"
+		]
+	}
+}

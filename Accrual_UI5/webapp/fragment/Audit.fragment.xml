@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table" displayBlock="true">
+	<Dialog showHeader="true" contentHeight="auto" contentWidth="90rem" id="cdialog1">
+		<VBox class="whiteBackGround" width="97%">
+		
+			<t:Table id="displayAuditHistoryTable" rows="{path:'AuditLog>/', sorter: { path: 'CHANGEDON', descending: true }}" class="allTables"
+				selectionMode="None" visibleRowCount="8" visibleRowCountMode="Interactive" >
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="auditTitle"/>
+						<ToolbarSpacer/>
+						<Button id="auditExport" icon="sap-icon://excel-attachment" press="auditExportxls" />
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns wrapping="true">
+					<t:Column width="15rem" sortProperty="FNAME" filterProperty="FNAME">
+						<Label text="{i18n>fname}" wrapping="true" class="allTableHeader"/>
+						<t:template>
+							<Text text="{AuditLog>FNAME}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="15rem" sortProperty="CHANGEDBY" filterProperty="CHANGEDBY">
+						<Label text="{i18n>changedby}" wrapping="true" class="allTableHeader"/>
+						<t:template>
+							<Text text="{AuditLog>CHANGEDBY}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>changedon}" wrapping="true" class="allTableHeader"/>
+						<t:template>
+							<Text text="{path:'AuditLog>CHANGEDON',formatter:'.formatter.methodFormatTime'}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="15rem">
+						<Label text="{i18n>oldvalue}" wrapping="true" class="allTableHeader"/>
+						<t:template>
+							<Text text="{AuditLog>OLDVALUE}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="15rem">
+						<Label text="{i18n>newvalue}" wrapping="true" class="allTableHeader"/>
+						<t:template>
+							<Text text="{AuditLog>NEWVALUE}"/>
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</VBox>
+		<beginButton>
+			<Button text="{i18n>cancel}" press="onDetCancel1"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

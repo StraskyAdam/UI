@@ -1,0 +1,1075 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:core="sap.ui.core" xmlns:sv="sap.ui.comp.smartvariants"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	class="sapUiSizeCompact">
+	<HBox>
+		<Text width="70rem" class="ThesePOs"/>
+	</HBox>
+	<OverflowToolbar design="Transparent" width="100%">
+		<ToolbarSpacer/>
+		<Button icon="sap-icon://clear-filter" id="clearThreFilter" visible="true" tooltip="{i18n>clearFiltBtnTooltip}" press="onClearThreFilters"/>
+	</OverflowToolbar>
+	<smartFilterBar:SmartFilterBar beforeVariantFetch="beforeVariantSave" afterVariantLoad="afterVariantLoad" id="smartFilterBarThre"
+		smartVariant="__SVM023" useToolbar="false" entitySet="thresholdParameters" liveMode="false" persistencyKey="SmartFilter_Explored2"
+		visible="{filterShown}" assignedFiltersChanged="onAssignedFiltersChanged" showFilterConfiguration="false">
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration key="FilterFieldThre0" index="0" label="{i18n>PoNum}" groupId="_BASIC" width="100px"
+				visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<MultiInput id="threServPoNum" valueHelpRequest="onValueHelpDialogPONum" showValueHelp="true" showSuggestion="true" submit="onPoFilterEnter"
+						tokenUpdate="onTokenUpdate" class="sapUiSmallMarginEnd"></MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration key="FilterFieldThre1" index="1" label="{i18n>lineItem}" groupId="_BASIC" width="100px"
+				visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<MultiInput id="threServItemNo" valueHelpRequest="onValueHelpDialogItemNum" showValueHelp="true" submit="onItemFilterEnter"
+						tokenUpdate="onTokenItemUpdate" class="sapUiSmallMarginEnd"></MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration key="FilterFieldThre2" index="2" label="{i18n>supplierName}" groupId="_BASIC" width="100px"
+				visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<MultiInput id="threServSuppName" valueHelpRequest="onValueHelpDialogSupName" showValueHelp="true" submit="onSuppIDFilterEnter"
+						tokenUpdate="onTokenSuppIDUpdate" class="sapUiSmallMarginEnd"></MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<smartFilterBar:groupConfiguration>
+			<smartFilterBar:GroupConfiguration id="datarepfilterthre" key="DOA_DataReports" index="2" label="Data and Reports" change="onGroupChange"></smartFilterBar:GroupConfiguration>
+			<smartFilterBar:GroupConfiguration key="_BASIC" index="1"></smartFilterBar:GroupConfiguration>
+		</smartFilterBar:groupConfiguration>
+		<!-- layout data used to make the table growing but the filter bar fixed -->
+		<smartFilterBar:layoutData>
+			<FlexItemData shrinkFactor="0"/>
+		</smartFilterBar:layoutData>
+	</smartFilterBar:SmartFilterBar>
+	<smartTable:SmartTable id="SmartTableBthreshold" entitySet="thresholdParameters" placeToolbarInTable="true" useExportToExcel="true"
+		smartFilterId="smartFilterBarThre" beforeExport="onBeforeExport" tableType="Table" useTablePersonalisation="true" editable="false"
+		useVariantManagement="true" showRowCount="true" header="{i18n>serviceThre}"
+		initiallyVisibleFields="EXCHANGERATE_DEC,TOTWRKCOMPPER_CHAR,PONUMBER,SUPPLIERNAME,PSTYPE,ITEMNO,POLINEDESC,GRVALUE,POVALUE,POCREATEDAT,PO_PREPARER,POOWNER_EMAIL,WRKSTRTDATE,WRKENDDATE,TOTWRKCOMPAMT,EPNUMBER,TOTWRKCOMPPER,LASTMONTHWRKCOMP,INVVALUE,STATUS,AMOUNTACCRUED,POCURRENCY,ACCRUALMETHOD,STRAIGHTLINEMTHD,ASSETID,ZACTIVITYNBR"
+ 		requestAtLeastFields="EXCHANGERATE_DEC,TOTWRKCOMPPER_CHAR,TOTWRKCOMPAMT,POCLOSURE_FLAG,PO_CLOSURE,INVVALUE_USD,POCREATEDAT,TOTWRKCOMPAMT_CHAR,GRVALUE_USD,POVALUE_USD,AMOUNTACCRUED_USD,EXCHANGERATE,INVVALUE_USD,GRVALUE_USD,TOTWRKCOMPPER,POVALUE_USD,AMOUNTACCRUED_USD,POVALUE_COCO,EDGEWTDAMT,COCDECURR,TOTWRKCOMPAMT_COCDECURR,COMPANYCODE,PURCHASINGUNIT,FULL_NAME,DECIMAL_FORMAT,GLACCOUNT,COSTCENTER,MANAGEUNIT,INTERNALORDER,PURCHASINGUNIT,PROFITCENTER,ASSETID,REGION,ZACTIVITYNBR"
+		ignoredFields="IP_EMAIL,IP_PSTYPE,MARKASREVIEWED" persistencyKey="SmartTableRefApp_Explored" enableAutoBinding="true" editTogglable="false"
+		showFullScreenButton="true" width="98%" beforeRebindTable="onBeforeRebindThresholdTable">
+		<t:Table id="thrTab" selectionMode="MultiToggle" ariaLabelledBy="title" enableSelectAll="false" rowSelectionChange="onSelection"
+			cellClick="onClickStatus" threshold="100" fixedColumnCount="4">
+			<t:columns>
+				<!--Company Code -->
+				<t:Column width="6rem" sortProperty="COMPANYCODE" filterProperty="COMPANYCODE" class="whiteColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "COMPANYCODE","columnIndex":"0","leadingProperty": "COMPANYCODE"}'/>
+					</t:customData>
+					<Label text="{i18n>Companycode}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{COMPANYCODE}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Number-->
+				<t:Column width="7rem" id="PONumThre" sortProperty="PONUMBER" filterProperty="PONUMBER" class="whiteColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PONUMBER","columnIndex":"1","leadingProperty": "PONUMBER"}'/>
+					</t:customData>
+					<Label text="{i18n>PoNum}" class="tileSubText2"/>
+					<t:template>
+						<HBox id="threHbox">
+							<Link text="{PONUMBER}" id="threPONumber" press="onPressAribaLink"/>
+							<core:Icon class="iconMargin" visible="{path:'POCREATEDAT',formatter:'.formatter.iconFormat'}" src="sap-icon://favorite" size="0.8rem"
+								color="#ee1100" tooltip="{i18n>NewPO}"/>
+						</HBox>
+					</t:template>
+				</t:Column>
+				<!--Line Item-->
+				<t:Column width="6rem" sortProperty="ITEMNO" filterProperty="ITEMNO">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ITEMNO","columnIndex":"2","leadingProperty": "ITEMNO"}'/>
+					</t:customData>
+					<Label text="{i18n>lineItem}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{ITEMNO}" id="itemNum"/>
+					</t:template>
+				</t:Column>
+				<!--Supplier Code-->
+				<t:Column width="9rem" sortProperty="SUPPLIERID" filterProperty="SUPPLIERID" class="pinkColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SUPPLIERID","columnIndex":"5","leadingProperty": "SUPPLIERID"}'/>
+					</t:customData>
+					<Label text="{i18n>supplierID}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{SUPPLIERID}"/>
+					</t:template>
+				</t:Column>
+				<!--Supplier Name-->
+				<t:Column width="9rem" sortProperty="SUPPLIERNAME" filterProperty="SUPPLIERNAME" class="pinkColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SUPPLIERNAME","columnIndex":"6","leadingProperty": "SUPPLIERNAME"}'/>
+					</t:customData>
+					<Label text="{i18n>supplierName}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{SUPPLIERNAME}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--EXCHANGERATE-->
+				<t:Column width="8rem" hAlign="Right" sortProperty="EXCHANGERATE" filterProperty="EXCHANGERATE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EXCHANGERATE","columnIndex":"7","leadingProperty": "EXCHANGERATE"}'/>
+					</t:customData>
+					<Label text="{i18n>exchangerate}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{EXCHANGERATE}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Document Currency-->
+				<t:Column hAlign="Left" width="6rem" sortProperty="POCURRENCY" filterProperty="POCURRENCY">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POCURRENCY","columnIndex":"8","leadingProperty": "POCURRENCY"}'/>
+					</t:customData>
+					<Label text="{i18n>docCurr}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{POCURRENCY}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Line Description-->
+				<t:Column width="9rem" sortProperty="POLINEDESC" filterProperty="POLINEDESC">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POLINEDESC","columnIndex":"3","leadingProperty": "POLINEDESC"}'/>
+					</t:customData>
+					<Label text="{i18n>lineDesc}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{POLINEDESC}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--PO Closure-->
+				<t:Column width="8rem" sortProperty="PO_CLOSURE" filterProperty="PO_CLOSURE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PO_CLOSURE","columnIndex":"4","leadingProperty": "PO_CLOSURE"}'/>
+					</t:customData>
+					<Label text="{i18n>poclosure}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<CheckBox editable="{path:'userRoleDataModel>/', formatter:'.formatter.userAccess'}" id="threPOClosureCheckBox" select="threPOClosureSelect"
+							enabled="{path: 'POCLOSURE_FLAG', formatter:'.formatter.FlagCheck'}" selected="{ path: 'PO_CLOSURE', type: 'sap.ui.model.type.String' }"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--PO Value-->
+				<t:Column width="9rem" sortProperty="POVALUE" hAlign="Right" filterProperty="POVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POVALUE,POCURRENCY","columnIndex":"9","leadingProperty": "POVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>POvalue}" textAlign="Right" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'POVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}" id="idPOValueThre"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--POVALUE USD-->
+				<t:Column width="8rem" hAlign="Right" sortProperty="POVALUE_USD" filterProperty="POVALUE_USD">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POVALUE_USD","columnIndex":"10","leadingProperty": "POVALUE_USD"}'/>
+					</t:customData>
+					<Label text="{i18n>povalue_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'POVALUE_USD'], formatter:'.formatter.formatCurrencyUSD'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Status-->
+				<t:Column width="6rem" id="statusTabThr" sortProperty="STATUS" filterProperty="STATUS">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "STATUS","columnIndex":"11","leadingProperty": "STATUS"}'/>
+					</t:customData>
+					<Label text="{i18n>status}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{STATUS}"/>
+					</t:template>
+				</t:Column>
+				<!--Service Start Date-->
+				<t:Column width="9rem" id="WorkStartColumnThre" sortProperty="WRKSTRTDATE" filterProperty="WRKSTRTDATE" class="WorkStartColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "WRKSTRTDATE","columnIndex":"12","leadingProperty": "WRKSTRTDATE" , "type":"date"}'/>
+					</t:customData>
+					<Label text="{i18n>WorkStart}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'WRKSTRTDATE',formatter:'.formatter.workDateFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--Service End Date-->
+				<t:Column width="9rem" id="WorkEndColumnThre" sortProperty="WRKENDDATE" filterProperty="WRKENDDATE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "WRKENDDATE","columnIndex":"13","leadingProperty": "WRKENDDATE" , "type":"date"}'/>
+					</t:customData>
+					<Label text="{i18n>WorkEnd}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'WRKENDDATE',formatter:'.formatter.workDateFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--Service Completed Amount-->
+				<t:Column id="TotalAmtThr" hAlign="Right" width="10rem" sortProperty="TOTWRKCOMPAMT_CHAR" filterProperty="TOTWRKCOMPAMT_CHAR">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "TOTWRKCOMPAMT_CHAR,POCURRENCY","columnIndex":"14","leadingProperty": "TOTWRKCOMPAMT_CHAR"}'/>
+					</t:customData>
+					<Label text="{i18n>Amount}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Input value="{TOTWRKCOMPAMT_CHAR}" type="Text" textAlign="End" change="totalAmountThres"
+							editable="{path:'userRoleDataModel>/', formatter:'.formatter.userAccess'}" id="totalAmountThr"
+							enabled="{path: 'POCLOSURE_FLAG', formatter:'.formatter.FlagCheck'}"/>
+						<!--<Text text="{parts:[ 'userModel>/', 'TOTWRKCOMPAMT', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}"/>-->
+					</t:template>
+				</t:Column>
+				<!--% of Services Completed-->
+				<t:Column id="TotalPerThr" hAlign="Right" width="9rem" sortProperty="TOTWRKCOMPPER" filterProperty="TOTWRKCOMPPER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "TOTWRKCOMPPER","columnIndex":"15","leadingProperty": "TOTWRKCOMPPER"}'/>
+					</t:customData>
+					<Label text="{i18n>percent}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<!-- Type is removed -->
+						<Input value="{TOTWRKCOMPPER}" textAlign="Right" change="totalPercentThres" type="Number"
+							editable="{path:'userRoleDataModel>/', formatter:'.formatter.userAccess'}" id="totalPercentThr"
+							enabled="{path: 'POCLOSURE_FLAG', formatter:'.formatter.FlagCheck'}"/>
+						<!--<Text text="{parts:[ 'userModel>/', 'TOTWRKCOMPPER' ], formatter:'.formatter.formatPercent'}" textAlign="Right"/>-->
+					</t:template>
+				</t:Column>
+				<!--Service Completed Amount USD-->
+				<t:Column hAlign="Right" width="10rem" sortProperty="TOTWRKCOMPAMT_USD_CHAR" filterProperty="TOTWRKCOMPAMT_USD_CHAR">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "TOTWRKCOMPAMT_USD_CHAR","columnIndex":"16","leadingProperty": "TOTWRKCOMPAMT_USD_CHAR"}'/>
+					</t:customData>
+					<Label text="{i18n>AmountUSD}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text id="totalUSDAmountThr" text="{TOTWRKCOMPAMT_USD_CHAR}"/>
+					</t:template>
+				</t:Column>
+				<!--Goods Receipt to Date -->
+				<!--<t:Column width="11rem" hAlign="Right" sortProperty="GRVALUE" filterProperty="GRVALUE">-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "GRVALUE","columnIndex":"16","leadingProperty": "GRVALUE"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>Goods}" textAlign="Right" wrapping="true" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--		<Text text="{parts:[ 'userModel>/', 'GRVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--MVP2 changes Start of Code-->
+				<!--GRVALUE USD-->
+				<!--<t:Column width="8rem" hAlign="Right" sortProperty="GRVALUE_USD" filterProperty="GRVALUE_USD">-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "GRVALUE_USD","columnIndex":"17","leadingProperty": "GRVALUE_USD"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>gr_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--		<Text text="{parts:[ 'userModel>/', 'GRVALUE_USD'], formatter:'.formatter.formatCurrencyUSD'}"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--MVP2 changes End of Code-->
+				<!--Purchasing Unit-->
+				<!--<t:Column width="8rem" sortProperty="PURCHASINGUNIT" filterProperty="PURCHASINGUNIT"-->
+				<!--	visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "PURCHASINGUNIT","columnIndex":"13","leadingProperty": "PURCHASINGUNIT"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>purchasingUnit}" wrapping="true" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--		<Text text="{path:'PURCHASINGUNIT'}"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--Management Unit-->
+				<t:Column width="8rem" sortProperty="MANAGEUNIT" filterProperty="MANAGEUNIT">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "MANAGEUNIT","columnIndex":"29","leadingProperty": "MANAGEUNIT"}'/>
+					</t:customData>
+					<Label text="{i18n>ManageUnit}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'MANAGEUNIT'}"/>
+					</t:template>
+				</t:Column>
+				<!--Invoice Amount to Date-->
+				<!--<t:Column width="9rem" hAlign="Right" sortProperty="INVVALUE" filterProperty="INVVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INVVALUE,POCURRENCY","columnIndex":"17","leadingProperty": "INVVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>InvoicePO}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'INVVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}"
+							id="idInvoiceAmountToDateThre"/>
+					</t:template>
+				</t:Column>-->
+				<t:Column width="9rem" hAlign="Right" sortProperty="INVVALUE" filterProperty="INVVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INVVALUE,POCURRENCY","columnIndex":"18","leadingProperty": "INVVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>Invoice}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'INVVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}"
+							id="idInvoiceAmountToDateThre"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--INVVALUE USD-->
+				<t:Column width="8rem" hAlign="Right" sortProperty="INVVALUE_USD" filterProperty="INVVALUE_USD">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INVVALUE_USD","columnIndex":"19","leadingProperty": "INVVALUE_USD"}'/>
+					</t:customData>
+					<Label text="{i18n>inv_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'INVVALUE_USD'], formatter:'.formatter.formatCurrencyUSD'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Amount to be accrued-->
+				<t:Column width="9rem" hAlign="Right" sortProperty="AMOUNTACCRUED_CHAR" filterProperty="AMOUNTACCRUED_CHAR">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "AMOUNTACCRUED_CHAR,POCURRENCY","columnIndex":"20","leadingProperty": "AMOUNTACCRUED_CHAR"}'/>
+					</t:customData>
+					<Label text="{i18n>AmountTo}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text id="totalAmtAccruThr" text="{parts:[ 'AMOUNTACCRUED_CHAR', 'POCURRENCY' ]}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--AMOUNTACCRUED USD-->
+				<t:Column width="8rem" hAlign="Right" sortProperty="AMOUNTACCRUED_USD_CHAR" filterProperty="AMOUNTACCRUED_USD_CHAR">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "AMOUNTACCRUED_USD_CHAR","columnIndex":"21","leadingProperty": "AMOUNTACCRUED_USD_CHAR"}'/>
+					</t:customData>
+					<Label text="{i18n>amtaccru_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text id="totalUSDAmtAccruThr" text="{AMOUNTACCRUED_USD_CHAR}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Straight Line Method-->
+				<t:Column width="9rem" hAlign="Right">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "STRAIGHTLINEMTHD","columnIndex":"22","leadingProperty": "STRAIGHTLINEMTHD","type": "string"}'/>
+					</t:customData>
+					<Label text="{i18n>straightlinemthd}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<CheckBox id="totalStLineThr" select="onClickCheckBoxThre" selected="{ path: 'STRAIGHTLINEMTHD', type: 'sap.ui.model.type.String' }"
+							editable="{path:'userRoleDataModel>/', formatter:'.formatter.userAccess'}"
+							enabled="{path: 'POCLOSURE_FLAG', formatter:'.formatter.FlagCheck'}"/>
+					</t:template>
+				</t:Column>
+				<!--Accrual Method-->
+				<t:Column width="9rem" sortProperty="ACCRUALMETHOD" filterProperty="ACCRUALMETHOD">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ACCRUALMETHOD","columnIndex":"23","leadingProperty": "ACCRUALMETHOD"}'/>
+					</t:customData>
+					<Label text="{i18n>Accrualmethod}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'ACCRUALMETHOD',formatter:'.formatter.methodFormat'}" id="totalAccMetThr"/>
+					</t:template>
+				</t:Column>
+				<!--Asset ID-->
+				<t:Column width="8rem" sortProperty="ASSETID" filterProperty="ASSETID">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ASSETID","columnIndex":"24","leadingProperty": "ASSETID"}'/>
+					</t:customData>
+					<Label text="{i18n>assetId}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'ASSETID'}"/>
+					</t:template>
+				</t:Column>
+				<!--Internal Order-->
+				<t:Column width="8rem" sortProperty="INTERNALORDER" filterProperty="INTERNALORDER">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INTERNALORDER","columnIndex":"25","leadingProperty": "INTERNALORDER"}'/>
+					</t:customData>
+					<Label text="{i18n>internalorder}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'INTERNALORDER'}"/>
+					</t:template>
+				</t:Column>
+				<!--Profit Center-->
+				<t:Column width="8rem" sortProperty="PROFITCENTER" filterProperty="PROFITCENTER">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PROFITCENTER","columnIndex":"26","leadingProperty": "PROFITCENTER"}'/>
+					</t:customData>
+					<Label text="{i18n>profitcenter}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'PROFITCENTER'}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Owner -->
+				<t:Column width="12rem" sortProperty="POOWNER_EMAIL" filterProperty="POOWNER_EMAIL">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POOWNER_EMAIL","columnIndex":"27","leadingProperty": "POOWNER_EMAIL"}'/>
+					</t:customData>
+					<Label text="{i18n>POowner}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{POOWNER_EMAIL}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Preparer-->
+				<t:Column width="12rem" sortProperty="PO_PREPARER" filterProperty="PO_PREPARER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PO_PREPARER","columnIndex":"28","leadingProperty": "PO_PREPARER"}'/>
+					</t:customData>
+					<Label text="{i18n>POpreparer}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'PO_PREPARER'}"/>
+					</t:template>
+				</t:Column>
+				<!--Reviewed By-->
+				<t:Column width="12rem" sortProperty="REVIWED_BY" filterProperty="REVIWED_BY">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "REVIWED_BY","columnIndex":"29","leadingProperty": "REVIWED_BY"}'/>
+					</t:customData>
+					<Label text="{i18n>ReviewedBy}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'REVIWED_BY'}"/>
+					</t:template>
+				</t:Column>
+				<!--Last Updated On-->
+				<t:Column width="12rem" sortProperty="CHANGED_ON" filterProperty="CHANGED_ON">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CHANGED_ON","columnIndex":"30","leadingProperty": "CHANGED_ON", "type":"date"}'/>
+					</t:customData>
+					<Label text="{i18n>ChangedDate}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:['CHANGED_ON' ], formatter:'.formatter.methodFormatTime'}"/>
+					</t:template>
+				</t:Column>
+				<!--GL Account-->
+				<t:Column width="8rem" sortProperty="GLACCOUNT" filterProperty="GLACCOUNT">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "GLACCOUNT","columnIndex":"31","leadingProperty": "GLACCOUNT"}'/>
+					</t:customData>
+					<Label text="{i18n>GLAccount}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'GLACCOUNT',formatter:'.formatter.glAccountFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--Cost Center-->
+				<t:Column width="8rem" sortProperty="COSTCENTER" filterProperty="COSTCENTER">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "COSTCENTER","columnIndex":"32","leadingProperty": "COSTCENTER"}'/>
+					</t:customData>
+					<Label text="{i18n>CostCenter}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'COSTCENTER',formatter:'.formatter.glAccountFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--Region-->
+				<t:Column width="8rem" sortProperty="REGION" filterProperty="REGION">
+					<!--visible="{path:'userRoleDataModel>/', formatter:'.formatter.userRoleVisibility'}">-->
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "REGION","columnIndex":"33","leadingProperty": "REGION"}'/>
+					</t:customData>
+					<Label text="{i18n>region}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'REGION'}"/>
+					</t:template>
+				</t:Column>
+				<!--EP Number-->
+				<t:Column width="8rem" sortProperty="EPNUMBER" filterProperty="EPNUMBER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EPNUMBER","columnIndex":"34","leadingProperty": "EPNUMBER"}'/>
+					</t:customData>
+					<Label text="{i18n>epnum}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'EPNUMBER'}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Creation  Date   -->
+				<t:Column width="8rem" sortProperty="POCREATEDAT" filterProperty="POCREATEDAT">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POCREATEDAT","columnIndex":"35","leadingProperty": "POCREATEDAT" , "type":"date"}'/>
+					</t:customData>
+					<Label text="{i18n>createdon}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'POCREATEDAT',formatter:'.formatter.workDateFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--PS Type-->
+				<!--<t:Column width="6rem" sortProperty="PSTYPE_TEXT" filterProperty="PSTYPE_TEXT">-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "PSTYPE_TEXT","columnIndex":"35","leadingProperty": "PSTYPE_TEXT"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>Type}" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--<Text text="{path:'PSTYPE',formatter:'.formatter.typeFormat'}"/>-->
+				<!--		<Text text="{PSTYPE_TEXT}"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--Activity Numbert-->
+					<t:Column width="8rem" sortProperty="ZACTIVITYNBR" filterProperty="ZACTIVITYNBR">
+						<t:customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "ZACTIVITYNBR","columnIndex":"36","leadingProperty": "ZACTIVITYNBR"}'/>
+						</t:customData>
+						<Label text="{i18n>actnr}" wrapping="true" class="tileSubText2"/>
+						<t:template>
+							<Text text="{path:'ZACTIVITYNBR'}"/>
+						</t:template>
+					</t:Column>
+				<!--PO Details-->
+				<t:Column width="8rem">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "FULL_NAME","columnIndex":"37","leadingProperty": ""}'/>
+					</t:customData>
+					<Label text="{i18n>podetails}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Link text="{i18n>podetails}" press="onLinkPress"/>
+					</t:template>
+				</t:Column>
+				<!--Audit Log-->
+				<t:Column width="8rem">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EDGEWTDAMT","columnIndex":"38","leadingProperty": ""}'/>
+					</t:customData>
+					<Label text="{i18n>audit}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Button press="detDialog1" icon="sap-icon://notification-2" type="Transparent" tooltip="Audit Log"/>
+					</t:template>
+				</t:Column>
+				<!--Split Accounting %-->
+				<t:Column width="9rem" sortProperty="DISTPERCENTAGE" filterProperty="DISTPERCENTAGE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "DISTPERCENTAGE","columnIndex":"39","leadingProperty": "DISTPERCENTAGE"}'/>
+					</t:customData>
+					<Label text="{i18n>main.label.SplitAccounting}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'DISTPERCENTAGE'}"/>
+					</t:template>
+				</t:Column>				
+			</t:columns>
+		</t:Table>
+		<smartTable:layoutData>
+			<FlexItemData growFactor="1" baseSize="0%"/>
+		</smartTable:layoutData>
+	</smartTable:SmartTable>
+	<HBox width="100%">
+		<HBox id="hboxNewPOThres" width="14rem" visible="false">
+			<core:Icon src="sap-icon://favorite" size="0.8rem" color="#ee1100" class="legendIcon"/>
+			<Text text="{i18n>newPONumber}"/>
+		</HBox>
+		<!--MVP2 changes Start of Code-->
+		<!--<Text id="recordMat" text="The records will not save until clicked on marked as reviewed"/>-->
+		<HBox id="recordThre" visible="false">
+			<core:Icon src="sap-icon://message-warning" size="0.8rem" color="#eed202" class="legendIcon"/>
+			<Text text="{i18n>notSavedText}"/>
+		</HBox>
+		<!--MVP2 changes End of Code-->
+	</HBox>
+	<Toolbar class="toolbarM1"></Toolbar>
+	<OverflowToolbar design="Transparent" width="100%">
+		<ToolbarSpacer/>
+		<Button icon="sap-icon://clear-filter" id="clearMatTBSFilterbar" visible="true" tooltip="{i18n>clearFiltBtnTooltip}"
+			press="onClearThreMatFilter"/>
+	</OverflowToolbar>
+	<smartFilterBar:SmartFilterBar beforeVariantFetch="beforeVariantSave" afterVariantLoad="afterVariantLoad" id="smartFilterBarThre2"
+		smartVariant="__SVM023" useToolbar="false" entitySet="openPOParameters" liveMode="false" persistencyKey="SmartFilter_Explored23"
+		visible="{filterShown}" assignedFiltersChanged="onAssignedFiltersChanged2" showFilterConfiguration="false">
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration key="FilterFieldThresh0" index="0" label="{i18n>PoNum}" groupId="_BASIC" width="100px"
+				visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<MultiInput id="matThrePoNumber" valueHelpRequest="onValueHelpDialogPONum" showValueHelp="true" showSuggestion="true"
+						submit="onPoFilterEnter" tokenUpdate="onTokenUpdate" class="sapUiSmallMarginEnd"></MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration key="FilterFieldThresh1" index="1" label="{i18n>lineItem}" groupId="_BASIC" width="100px"
+				visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<MultiInput id="matThreItemNos" valueHelpRequest="onValueHelpDialogItemNum" showValueHelp="true" submit="onItemFilterEnter"
+						tokenUpdate="onTokenItemUpdate" class="sapUiSmallMarginEnd"></MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration key="FilterFieldThresh2" index="2" label="{i18n>supplierName}" groupId="_BASIC" width="100px"
+				visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<MultiInput id="matThreSuppNames" valueHelpRequest="onValueHelpDialogSupName" showValueHelp="true" submit="onSuppIDFilterEnter"
+						tokenUpdate="onTokenSuppIDUpdate" class="sapUiSmallMarginEnd"></MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<smartFilterBar:groupConfiguration>
+			<smartFilterBar:GroupConfiguration id="datarepfilters" key="DOA_DataReports" index="2" label="Data and Reports" change="onGroupChange"></smartFilterBar:GroupConfiguration>
+			<smartFilterBar:GroupConfiguration key="_BASIC" index="1"></smartFilterBar:GroupConfiguration>
+		</smartFilterBar:groupConfiguration>
+		<!--layout data used to make the table growing but the filter bar fixed -->
+		<smartFilterBar:layoutData>
+			<FlexItemData shrinkFactor="0"/>
+		</smartFilterBar:layoutData>
+	</smartFilterBar:SmartFilterBar>
+	<smartTable:SmartTable id="SmartTableThres2" entitySet="thresholdParameters" placeToolbarInTable="false" useExportToExcel="true"
+		smartFilterId="smartFilterBarThre2" header="{i18n>materialThre}" beforeExport="onBeforeExport" tableType="Table" useTablePersonalisation="true"
+		editable="false" useVariantManagement="true" showRowCount="true"
+		initiallyVisibleFields="EXCHANGERATE_DEC,TOTWRKCOMPPER_CHAR,PONUMBER,SUPPLIERNAME,ITEMNO,POCREATEDAT,PO_PREPARER,POLINEDESC,POVALUE,POCURRENCY,TOTWRKCOMPAMT,GRVALUE,POOWNER_EMAIL, INVVALUE,STATUS,AMOUNTACCRUED, STRAIGHTLINEMTHD,ACCRUALMETHOD,REVIWED_BY,CHANGEDDATE,ZACTIVITYNBR"
+		requestAtLeastFields="EXCHANGERATE_DEC,TOTWRKCOMPPER_CHAR,POCLOSURE_FLAG,PO_CLOSURE,TOTWRKCOMPAMT,POCREATEDAT,INVVALUE_USD,GRVALUE_USD,POVALUE_USD,AMOUNTACCRUED_USD,EXCHANGERATE,POVALUE_COCO,EDGEWTDAMT,TOTWRKCOMPPER,COCDECURR,PURCHASINGUNIT,CHANGEDTIME,CHANGED_ON,COMPANYCODE,FULL_NAME,DECIMAL_FORMAT,EPNUMBER,GLACCOUNT,COSTCENTER,MANAGEUNIT,INTERNALORDER,PURCHASINGUNIT,PROFITCENTER,PURCHASINGORGANIZATION,ASSETID,REGION,ORDERQUANTITY,ZACTIVITYNBR"
+		persistencyKey="SmartTableExplored" ignoredFields="IP_EMAIL,IP_PSTYPE,MARKASREVIEWED,IP_POOWNER" enableAutoBinding="true"
+		editTogglable="false" showFullScreenButton="true" beforeRebindTable="onBeforeRebindThresholdTable2" width="100%">
+		<t:Table id="MatTableBThrs" selectionMode="MultiToggle" ariaLabelledBy="title" enableSelectAll="false" rowSelectionChange="onSelection"
+			cellClick="onClickStatus" threshold="100" fixedColumnCount="4">
+			<t:columns>
+				<!--Company Code -->
+				<t:Column width="6rem" sortProperty="COMPANYCODE" filterProperty="COMPANYCODE" class="whiteColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "COMPANYCODE","columnIndex":"0","leadingProperty": "COMPANYCODE"}'/>
+					</t:customData>
+					<Label text="{i18n>Companycode}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{COMPANYCODE}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Number-->
+				<t:Column width="7rem" sortProperty="PONUMBER" filterProperty="PONUMBER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PONUMBER","columnIndex":"1","leadingProperty": "PONUMBER"}'/>
+					</t:customData>
+					<Label text="{i18n>PoNum}" class="tileSubText2"/>
+					<t:template>
+						<!--<HBox>-->
+						<HBox id="poMatHBoxId2">
+							<Link text="{PONUMBER}" press="onPressAribaLink"/>
+							<core:Icon class="iconMargin" visible="{path:'POCREATEDAT',formatter:'.formatter.iconFormat'}" src="sap-icon://favorite" size="0.8rem"
+								color="#ee1100" tooltip="{i18n>NewPO}"/>
+						</HBox>
+					</t:template>
+				</t:Column>
+				<!--Line Item Number-->
+				<t:Column width="6rem" sortProperty="ITEMNO" filterProperty="ITEMNO">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ITEMNO","columnIndex":"2","leadingProperty": "ITEMNO"}'/>
+					</t:customData>
+					<Label text="{i18n>lineItem}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{ITEMNO}" id="itemMatNos"/>
+					</t:template>
+				</t:Column>
+				<!--PO Line Description-->
+				<t:Column width="9rem" sortProperty="POLINEDESC" filterProperty="POLINEDESC">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POLINEDESC","columnIndex":"3","leadingProperty": "POLINEDESC"}'/>
+					</t:customData>
+					<Label text="{i18n>lineDesc}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{POLINEDESC}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--PO Closure-->
+				<t:Column width="8rem" sortProperty="PO_CLOSURE" filterProperty="PO_CLOSURE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PO_CLOSURE","columnIndex":"4","leadingProperty": "PO_CLOSURE"}'/>
+					</t:customData>
+					<Label text="{i18n>poclosure}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<CheckBox id="totalPOClosureMater" select="onSelectthrePOClosureMater"
+							editable="{path:'userRoleDataModel>/', formatter:'.formatter.userAccess'}"
+							selected="{ path: 'PO_CLOSURE', type: 'sap.ui.model.type.String' }" enabled="{path: 'POCLOSURE_FLAG', formatter:'.formatter.FlagCheck'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Supplier Code-->
+				<t:Column width="9rem" sortProperty="SUPPLIERID" filterProperty="SUPPLIERID" class="pinkColumn">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SUPPLIERID","columnIndex":"5","leadingProperty": "SUPPLIERID"}'/>
+					</t:customData>
+					<Label text="{i18n>supplierID}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{SUPPLIERID}"/>
+					</t:template>
+				</t:Column>
+				<!--Supplier Name-->
+				<t:Column width="9rem" sortProperty="SUPPLIERNAME" filterProperty="SUPPLIERNAME">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SUPPLIERNAME","columnIndex":"6","leadingProperty": "SUPPLIERNAME"}'/>
+					</t:customData>
+					<Label text="{i18n>supplierName}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{SUPPLIERNAME}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--EXCHANGERATE-->
+				<t:Column width="8rem" hAlign="Right" sortProperty="EXCHANGERATE" filterProperty="EXCHANGERATE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EXCHANGERATE","columnIndex":"7","leadingProperty": "EXCHANGERATE"}'/>
+					</t:customData>
+					<Label text="{i18n>exchangerate}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{EXCHANGERATE}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--PO Value-->
+				<t:Column width="9rem" hAlign="Right" sortProperty="POVALUE" filterProperty="POVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POVALUE,POCURRENCY","columnIndex":"8","leadingProperty": "POVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>POvalue}" textAlign="Right" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'POVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--POVALUE USD-->
+				<t:Column width="9rem" hAlign="Right" sortProperty="POVALUE_USD" filterProperty="POVALUE_USD">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POVALUE_USD","columnIndex":"9","leadingProperty": "POVALUE_USD"}'/>
+					</t:customData>
+					<Label text="{i18n>povalue_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'POVALUE_USD'], formatter:'.formatter.formatCurrencyUSD'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Document Currency-->
+				<t:Column hAlign="Left" width="6rem" sortProperty="POCURRENCY" filterProperty="POCURRENCY">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POCURRENCY","columnIndex":"10","leadingProperty": "POCURRENCY"}'/>
+					</t:customData>
+					<Label text="{i18n>docCurr}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{POCURRENCY}"/>
+					</t:template>
+				</t:Column>
+				<!--Status-->
+				<t:Column width="6rem" sortProperty="STATUS" filterProperty="STATUS">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "STATUS","columnIndex":"11","leadingProperty": "STATUS"}'/>
+					</t:customData>
+					<Label text="{i18n>status}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{STATUS}"/>
+					</t:template>
+				</t:Column>
+				<!--Goods Receipt to Date  -->
+				<t:Column width="10rem" hAlign="Right" sortProperty="GRVALUE" filterProperty="GRVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "GRVALUE","columnIndex":"12","leadingProperty": "GRVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>Goods}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'GRVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}"
+							id="idGoodsReceivedToDateThre"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--GRVALUE USD-->
+				<t:Column width="10rem" hAlign="Right" sortProperty="GRVALUE_USD" filterProperty="GRVALUE_USD">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "GRVALUE_USD","columnIndex":"13","leadingProperty": "GRVALUE_USD"}'/>
+					</t:customData>
+					<Label text="{i18n>gr_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'GRVALUE_USD'], formatter:'.formatter.formatCurrencyUSD'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Invoice Amount to   Date  -->
+				<!--<t:Column width="10rem" hAlign="Right" sortProperty="INVVALUE" filterProperty="INVVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INVVALUE","columnIndex":"14","leadingProperty": "INVVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>InvoicePO}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'INVVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}" id="idInvoiceAmountThre"/>
+					</t:template>
+				</t:Column>-->
+				<t:Column width="10rem" hAlign="Right" sortProperty="INVVALUE" filterProperty="INVVALUE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INVVALUE","columnIndex":"15","leadingProperty": "INVVALUE"}'/>
+					</t:customData>
+					<Label text="{i18n>Invoice}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'INVVALUE', 'POCURRENCY' ], formatter:'.formatter.formatCurrencyWithCode'}" id="idInvoiceAmountThre"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--INVVALUE USD-->
+				<t:Column width="10rem" hAlign="Right" sortProperty="INVVALUE_USD" filterProperty="INVVALUE_USD">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INVVALUE_USD","columnIndex":"16","leadingProperty": "INVVALUE_USD"}'/>
+					</t:customData>
+					<Label text="{i18n>inv_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'userModel>/', 'INVVALUE_USD'], formatter:'.formatter.formatCurrencyUSD'}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--Amount to be Accrued-->
+				<t:Column width="10rem" hAlign="Right" sortProperty="AMOUNTACCRUED" filterProperty="AMOUNTACCRUED">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "AMOUNTACCRUED_CHAR,POCURRENCY","columnIndex":"17","leadingProperty": "AMOUNTACCRUED_CHAR"}'/>
+					</t:customData>
+					<Label text="{i18n>AmountTo}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:[ 'AMOUNTACCRUED_CHAR', 'POCURRENCY' ]}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes Start of Code-->
+				<!--AMOUNTACCRUED USD-->
+				<t:Column width="10rem" hAlign="Right" sortProperty="AMOUNTACCRUED_USD" filterProperty="AMOUNTACCRUED_USD_CHAR">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "AMOUNTACCRUED_USD_CHAR","columnIndex":"18","leadingProperty": "AMOUNTACCRUED_USD_CHAR"}'/>
+					</t:customData>
+					<Label text="{i18n>amtaccru_usd}" textAlign="Right" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{AMOUNTACCRUED_USD_CHAR}"/>
+					</t:template>
+				</t:Column>
+				<!--MVP2 changes End of Code-->
+				<!--PO Owner-->
+				<t:Column width="12rem" sortProperty="POOWNER_EMAIL" filterProperty="POOWNER_EMAIL">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POOWNER_EMAIL","columnIndex":"19","leadingProperty": "POOWNER_EMAIL"}'/>
+					</t:customData>
+					<Label text="{i18n>POowner}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{POOWNER_EMAIL}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Preparer-->
+				<t:Column width="12rem" sortProperty="PO_PREPARER" filterProperty="PO_PREPARER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PO_PREPARER","columnIndex":"20","leadingProperty": "PO_PREPARER"}'/>
+					</t:customData>
+					<Label text="{i18n>POpreparer}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'PO_PREPARER'}"/>
+					</t:template>
+				</t:Column>
+				<!--Reviewed By-->
+				<t:Column width="12rem" sortProperty="REVIWED_BY" filterProperty="REVIWED_BY">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "REVIWED_BY","columnIndex":"21","leadingProperty": "REVIWED_BY"}'/>
+					</t:customData>
+					<Label text="{i18n>ReviewedBy}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'REVIWED_BY'}"/>
+					</t:template>
+				</t:Column>
+				<!--Last Update On-->
+				<t:Column width="12rem" sortProperty="CHANGED_ON" filterProperty="CHANGED_ON">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CHANGED_ON","columnIndex":"22","leadingProperty": "CHANGED_ON", "type":"date"}'/>
+					</t:customData>
+					<Label text="{i18n>ChangedDate}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{parts:['CHANGED_ON' ], formatter:'.formatter.methodFormatTime'}"/>
+					</t:template>
+				</t:Column>
+				<!--Purchasing Unit-->
+				<!--<t:Column width="8rem" sortProperty="PURCHASINGUNIT" filterProperty="PURCHASINGUNIT" >-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "PURCHASINGUNIT","columnIndex":"16","leadingProperty": "PURCHASINGUNIT"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>purchasingUnit}" wrapping="true" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--		<Text text="{path:'PURCHASINGUNIT'}"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--GL Account-->
+				<t:Column width="8rem" sortProperty="GLACCOUNT" filterProperty="GLACCOUNT">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "GLACCOUNT","columnIndex":"23","leadingProperty": "GLACCOUNT"}'/>
+					</t:customData>
+					<Label text="{i18n>GLAccount}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'GLACCOUNT',formatter:'.formatter.glAccountFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--Cost Center-->
+				<t:Column width="8rem" sortProperty="COSTCENTER" filterProperty="COSTCENTER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "COSTCENTER","columnIndex":"24","leadingProperty": "COSTCENTER"}'/>
+					</t:customData>
+					<Label text="{i18n>CostCenter}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'COSTCENTER',formatter:'.formatter.glAccountFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--Management Unit-->
+				<t:Column width="8rem" sortProperty="MANAGEUNIT" filterProperty="MANAGEUNIT">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "MANAGEUNIT","columnIndex":"25","leadingProperty": "MANAGEUNIT"}'/>
+					</t:customData>
+					<Label text="{i18n>ManageUnit}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'MANAGEUNIT'}"/>
+					</t:template>
+				</t:Column>
+				<!--Internal Order-->
+				<t:Column width="8rem" sortProperty="INTERNALORDER" filterProperty="INTERNALORDER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "INTERNALORDER","columnIndex":"26","leadingProperty": "INTERNALORDER"}'/>
+					</t:customData>
+					<Label text="{i18n>internalorder}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'INTERNALORDER'}"/>
+					</t:template>
+				</t:Column>
+				<!--Profit Center-->
+				<t:Column width="8rem" sortProperty="PROFITCENTER" filterProperty="PROFITCENTER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "PROFITCENTER","columnIndex":"27","leadingProperty": "PROFITCENTER"}'/>
+					</t:customData>
+					<Label text="{i18n>profitcenter}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'PROFITCENTER'}"/>
+					</t:template>
+				</t:Column>
+				<!--Asset ID-->
+				<t:Column width="8rem" sortProperty="ASSETID" filterProperty="ASSETID">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ASSETID","columnIndex":"28","leadingProperty": "ASSETID"}'/>
+					</t:customData>
+					<Label text="{i18n>assetId}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'ASSETID'}"/>
+					</t:template>
+				</t:Column>
+				<!--Region-->
+				<t:Column width="8rem" sortProperty="REGION" filterProperty="REGION">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "REGION","columnIndex":"29","leadingProperty": "REGION"}'/>
+					</t:customData>
+					<Label text="{i18n>region}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'REGION'}"/>
+					</t:template>
+				</t:Column>
+				<!--EP Number-->
+				<t:Column width="8rem" sortProperty="EPNUMBER" filterProperty="EPNUMBER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EPNUMBER","columnIndex":"30","leadingProperty": "EPNUMBER"}'/>
+					</t:customData>
+					<Label text="{i18n>epnum}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'EPNUMBER'}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Created At -->
+				<t:Column width="8rem" sortProperty="POCREATEDAT" filterProperty="POCREATEDAT">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "POCREATEDAT","columnIndex":"31","leadingProperty": "POCREATEDAT", "type":"date"}'/>
+					</t:customData>
+					<Label text="{i18n>createdon}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'POCREATEDAT',formatter:'.formatter.workDateFormat'}"/>
+					</t:template>
+				</t:Column>
+				<!--PO Details-->
+				<t:Column width="8rem">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "FULL_NAME","columnIndex":"32","leadingProperty": ""}'/>
+					</t:customData>
+					<Label text="{i18n>podetails}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Link text="{i18n>podetails}" id="aribaDLinkMater" press="onLinkPress"/>
+					</t:template>
+				</t:Column>
+				<!--BELOW ONES are HIDDEN-->
+				<!--StraightLine Method-->
+				<!--<t:Column width="9rem" visible="false" hAlign="Right">-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "STRAIGHTLINEMTHD","columnIndex":"27","leadingProperty": "STRAIGHTLINEMTHD","type": "string"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>straightlinemthd}" wrapping="true" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--		<CheckBox select="onClickCheckBox" selected="{ path: 'STRAIGHTLINEMTHD', type: 'sap.ui.model.type.String' }" editable="true"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--Accrual Method-->
+				<!--<t:Column width="9rem" visible="false" sortProperty="ACCRUALMETHOD" filterProperty="ACCRUALMETHOD">-->
+				<!--	<t:customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "ACCRUALMETHOD","columnIndex":"28","leadingProperty": "ACCRUALMETHOD"}'/>-->
+				<!--	</t:customData>-->
+				<!--	<Label text="{i18n>Accrualmethod}" wrapping="true" class="tileSubText2"/>-->
+				<!--	<t:template>-->
+				<!--		<Text text="{path:'ACCRUALMETHOD'}"/>-->
+				<!--	</t:template>-->
+				<!--</t:Column>-->
+				<!--Purchasing Organization-->
+				<t:Column width="8rem" sortProperty="PURCHASINGORGANIZATION" filterProperty="PURCHASINGORGANIZATION" visible="false">
+					<t:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "PURCHASINGORGANIZATION","columnIndex":"33","leadingProperty": "PURCHASINGORGANIZATION"}'/>
+					</t:customData>
+					<Label text="{i18n>purchasingorganisation}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'PURCHASINGORGANIZATION'}"/>
+					</t:template>
+				</t:Column>
+				<!--Order Quantity-->
+				<t:Column width="8rem" sortProperty="ORDERQUANTITY" filterProperty="ORDERQUANTITY" visible="false">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ORDERQUANTITY","columnIndex":"34","leadingProperty": "ORDERQUANTITY"}'/>
+					</t:customData>
+					<Label text="{i18n>orderquantity}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'ORDERQUANTITY'}"/>
+					</t:template>
+				</t:Column>
+				<!--Activity Numbert-->
+					<t:Column width="8rem" sortProperty="ZACTIVITYNBR" filterProperty="ZACTIVITYNBR">
+						<t:customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "ZACTIVITYNBR","columnIndex":"35","leadingProperty": "ZACTIVITYNBR"}'/>
+						</t:customData>
+						<Label text="{i18n>actnr}" wrapping="true" class="tileSubText2"/>
+						<t:template>
+							<Text text="{path:'ZACTIVITYNBR'}"/>
+						</t:template>
+					</t:Column>
+				<!--Audit Log-->
+				<t:Column width="8rem">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EDGEWTDAMT","columnIndex":"36","leadingProperty": "EDGEWTDAMT"}'/>
+					</t:customData>
+					<Label text="{i18n>audit}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Button press="detDialog1" icon="sap-icon://notification-2" type="Transparent" tooltip="Audit Log"/>
+					</t:template>
+				</t:Column>
+				<!--Split Accounting %-->
+				<t:Column width="9rem" sortProperty="DISTPERCENTAGE" filterProperty="DISTPERCENTAGE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "DISTPERCENTAGE","columnIndex":"37","leadingProperty": "DISTPERCENTAGE"}'/>
+					</t:customData>
+					<Label text="{i18n>main.label.SplitAccounting}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{path:'DISTPERCENTAGE'}"/>
+					</t:template>
+				</t:Column>				
+			</t:columns>
+		</t:Table>
+		<smartTable:layoutData>
+			<FlexItemData growFactor="1" baseSize="0%"/>
+		</smartTable:layoutData>
+	</smartTable:SmartTable>
+	<HBox width="100%">
+		<HBox id="hboxNewPOMatPOOwnerThr" width="14rem" visible="false">
+			<core:Icon src="sap-icon://favorite" size="0.8rem" color="#ee1100" class="legendIcon"/>
+			<Text text="{i18n>newPONumber}"/>
+		</HBox>
+		<!--MVP2 changes Start of Code-->
+		<!--<Text id="recordMat" text="The records will not save until clicked on marked as reviewed"/>-->
+		<HBox id="recordMater">
+			<core:Icon src="sap-icon://message-warning" size="0.8rem" color="#eed202" class="legendIcon"/>
+			<Text text="{i18n>notSavedText}"/>
+		</HBox>
+		<!--MVP2 changes End of Code-->
+	</HBox>
+	<HBox justifyContent="End" class="sapUiLargeMarginTop sapUiSmallMarginEnd">
+		<Button text="{i18n>MarkasReviewed}" visible="{path:'userRoleDataModel>/', formatter:'.formatter.userAccess'}" id="saveBtnThre"
+			type="Emphasized" press="onApproveMarkAsReviewedPressThre"/>
+	</HBox>
+</core:FragmentDefinition>

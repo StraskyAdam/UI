@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices m:DataServiceVersion="2.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="default" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="auditType">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="2147483647"/>
+				<Property Name="OLDVALUE" Type="Edm.String" MaxLength="5000"/>
+				<Property Name="NEWVALUE" Type="Edm.String" MaxLength="5000"/>
+				<Property Name="CHANGEDON" Type="Edm.DateTime"/>
+				<Property Name="CHANGEDBY" Type="Edm.String" MaxLength="100"/>
+				<Property Name="ACTIVEFLAG" Type="Edm.String" MaxLength="1"/>
+				<Property Name="PONUMBER" Type="Edm.String" MaxLength="10"/>
+				<Property Name="LINEITEM" Type="Edm.String" MaxLength="5"/>
+				<Property Name="FNAME" Type="Edm.String" MaxLength="50"/>
+			</EntityType>
+			<EntityType Name="auditParametersType">
+				<Key>
+					<PropertyRef Name="IP_PONUM"/>
+					<PropertyRef Name="IP_LINEITEM"/>
+				</Key>
+				<Property Name="IP_PONUM" Type="Edm.String" Nullable="false" MaxLength="10"/>
+				<Property Name="IP_LINEITEM" Type="Edm.String" Nullable="false" MaxLength="5"/>
+				<NavigationProperty Name="Results" Relationship="default.auditParameters_to_auditType" FromRole="auditParametersPrincipal"
+					ToRole="auditDependent"/>
+			</EntityType>
+			<Association Name="auditParameters_to_auditType">
+				<End Type="default.auditParametersType" Role="auditParametersPrincipal" Multiplicity="1"/>
+				<End Type="default.auditType" Role="auditDependent" Multiplicity="*"/>
+			</Association>
+			<EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="audit" EntityType="default.auditType"/>
+				<EntitySet Name="auditParameters" EntityType="default.auditParametersType"/>
+				<AssociationSet Name="auditParameters_to_audit" Association="default.auditParameters_to_auditType">
+					<End Role="auditParametersPrincipal" EntitySet="auditParameters"/>
+					<End Role="auditDependent" EntitySet="audit"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

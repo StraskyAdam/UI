@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:core="sap.ui.core" xmlns:sv="sap.ui.comp.smartvariants"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	class="sapUiSizeCompact">
+	<smartTable:SmartTable id="exRateTable" entitySet="ctryConfigPO" placeToolbarInTable="true" useExportToExcel="true"
+		smartFilterId="smartFilterBar" header="{i18n>service}" beforeExport="onBeforeExport" tableType="Table" useTablePersonalisation="true"
+		editable="false" useVariantManagement="true" showRowCount="true" initiallyVisibleFields="ID,COUNTRY_CODE,COUNTRY_NAME"
+		requestAtLeastFields="BUKRS" ignoredFields="" persistencyKey="SmartTableRefApp_Explored" enableAutoBinding="true" editTogglable="false"
+		showFullScreenButton="true" width="100%" beforeRebindTable="onBeforeRebind">
+		<t:Table id="exTable" selectionMode="None" ariaLabelledBy="title" enableSelectAll="true" rowSelectionChange="onSelectReview"
+			cellClick="onClickStatus">
+			<t:columns>
+				<t:Column sortProperty="COMPANYCODE" filterProperty="COMPANYCODE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ID","columnIndex":"0","leadingProperty": "COMPANYCODE"}'/>
+					</t:customData>
+					<Label text="{i18n>sourceCurr}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{ID}"/>
+					</t:template>
+				</t:Column>
+				<t:Column sortProperty="PONUMBER" filterProperty="PONUMBER">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "COUNTRY_CODE","columnIndex":"1","leadingProperty": "PONUMBER"}'/>
+					</t:customData>
+					<Label text="{i18n>targetCurr}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{COUNTRY_CODE}"/>
+					</t:template>
+				</t:Column>
+				<t:Column sortProperty="ITEMNO" filterProperty="ITEMNO">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "COUNTRY_NAME","columnIndex":"2","leadingProperty": "ITEMNO"}'/>
+					</t:customData>
+					<Label text="{i18n>exRate}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{COUNTRY_NAME}"/>
+					</t:template>
+				</t:Column>
+				<t:Column sortProperty="POLINEDESC" filterProperty="POLINEDESC">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "BUKRS","columnIndex":"3","leadingProperty": "POLINEDESC"}'/>
+					</t:customData>
+					<Label text="{i18n>revExRate}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{BUKRS}"/>
+					</t:template>
+				</t:Column>
+				<t:Column sortProperty="PO_CLOSURE" filterProperty="PO_CLOSURE">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "BUKRS","columnIndex":"4","leadingProperty": "PO_CLOSURE"}'/>
+					</t:customData>
+					<Label text="{i18n>refDate}" wrapping="true" class="tileSubText2"/>
+					<t:template>
+						<Text text="{BUKRS}"/>
+					</t:template>
+				</t:Column>
+				<t:Column sortProperty="SUPPLIERID" filterProperty="SUPPLIERID">
+					<t:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "BUKRS","columnIndex":"5","leadingProperty": "SUPPLIERID"}'/>
+					</t:customData>
+					<Label text="{i18n>lastRepDate}" class="tileSubText2"/>
+					<t:template>
+						<Text text="{BUKRS}"/>
+					</t:template>
+				</t:Column>
+			</t:columns>
+		</t:Table>
+		<smartTable:layoutData>
+			<FlexItemData growFactor="1" baseSize="0%"/>
+		</smartTable:layoutData>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>

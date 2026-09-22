@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core">
+	<m:OverflowToolbar>
+	
+		<m:SearchField liveChange="onSearchCountryConfig" placeholder="Search" width="32%"/>
+
+		<m:ToolbarSpacer width="12.5%"/>
+		<m:Button id="button1" text="Create" type="Reject" press="onPressCreate" class="savebtn"/>
+		<!--<m:Button id="button2" text="Change" press="onPressChange" class="cancelbtn"/>-->
+		<m:Button id="button3" text="Delete" press="onPressDelete" class="cancelbtn"/>
+	</m:OverflowToolbar>
+	<Table rows="{path: '/results'}" id="countryConfigTable" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange="action">
+		<columns>
+			<Column width="auto">
+				<m:Label text="Country Code" design="Bold"/>
+				<template>
+					<m:Text text="{COUNTRY_CODE}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Country Name" design="Bold"/>
+				<template>
+					<m:Text text="{COUNTRY_NAME}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Company Code" design="Bold"/>
+				<template>
+					<m:Text text="{BUKRS}" wrapping="false"/>
+				</template>
+			</Column>
+		</columns>
+	</Table>
+</core:FragmentDefinition>

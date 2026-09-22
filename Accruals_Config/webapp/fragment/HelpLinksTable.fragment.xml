@@ -1,0 +1,46 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core">
+	<m:OverflowToolbar>
+	
+		<!--<m:SearchField liveChange="onSearchCountryConfig" placeholder="Search" width="32%"/>-->
+
+		<m:ToolbarSpacer width="52.5%"/>
+		<m:Button id="buttonh4" text="Create" type="Reject" press="onPressCreateLink" class="savebtn"/>
+		<m:Button id="buttonh2" text="Change" press="onPressChangeLink" class="cancelbtn"/>
+		<m:Button id="buttonh5" text="Delete" press="onPressDeleteLink" class="cancelbtn"/>
+	</m:OverflowToolbar>
+	<Table rows="{path: '/results'}" id="helpTable" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange="actionLink">
+		<columns>
+				<Column width="10rem">
+				<m:Label text="{i18n>role}" design="Bold"/>
+				<template>
+					<m:Text text="{ROLE}" wrapping="false"/>
+				</template>
+			</Column>
+				<Column width="14rem">
+				<m:Label text="{i18n>linkid}" design="Bold"/>
+				<template>
+					<m:Text text="{HELP_ID}" wrapping="false"/>
+				</template>
+			</Column>
+				<Column width="10rem">
+				<m:Label text="{i18n>lang}" design="Bold"/>
+				<template>
+					<m:Text text="{LANGUAGE}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="25rem">
+				<m:Label text="{i18n>reftopic}" design="Bold"/>
+				<template>
+					<m:Text text="{HELP_DESC}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="{i18n>reflink}" design="Bold"/>
+				<template>
+					<m:Link text="Link" href="{HELP_LINK}" target="_blank"/>
+				</template>
+			</Column>
+		
+		</columns>
+	</Table>
+</core:FragmentDefinition>

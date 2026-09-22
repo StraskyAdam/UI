@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices m:DataServiceVersion="2.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="default" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="roleType">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="2147483647"/>
+				<Property Name="FLAG" Type="Edm.String" MaxLength="1"/>
+			</EntityType>
+			<EntityType Name="roleParametersType">
+				<Key>
+					<PropertyRef Name="IP_EMAIL"/>
+				</Key>
+				<Property Name="IP_EMAIL" Type="Edm.String" Nullable="false" MaxLength="225"/>
+				<NavigationProperty Name="Results" Relationship="default.roleParameters_to_roleType" FromRole="roleParametersPrincipal"
+					ToRole="roleDependent"/>
+			</EntityType>
+			<Association Name="roleParameters_to_roleType">
+				<End Type="default.roleParametersType" Role="roleParametersPrincipal" Multiplicity="1"/>
+				<End Type="default.roleType" Role="roleDependent" Multiplicity="*"/>
+			</Association>
+			<EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="role" EntityType="default.roleType"/>
+				<EntitySet Name="roleParameters" EntityType="default.roleParametersType"/>
+				<AssociationSet Name="roleParameters_to_role" Association="default.roleParameters_to_roleType">
+					<End Role="roleParametersPrincipal" EntitySet="roleParameters"/>
+					<End Role="roleDependent" EntitySet="role"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

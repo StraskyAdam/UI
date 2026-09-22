@@ -1,0 +1,27 @@
+{
+  "xsappname": "Accrual_DEV",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+    "name": "$XSAPPNAME.write",
+    "description" : "View/EDIT/Approve data"
+    },
+     {
+    "name": "$XSAPPNAME.admin",
+    "description" : "Admin data"
+    }
+  ],
+  "role-templates": [
+ {
+    "name" : "READ_WRITE_ACCRUAL",				
+    "description" : "Role for View/Edit/Approve data",
+    "scope-references" : ["$XSAPPNAME.write","uaa.user"] 
+    },
+    {
+    "name" : "ADMIN_ACCRUAL",
+    "description" : "Role for Manage User Access",
+    "scope-references" : ["$XSAPPNAME.admin","$XSAPPNAME.write","uaa.user"]
+    }
+  ]
+}

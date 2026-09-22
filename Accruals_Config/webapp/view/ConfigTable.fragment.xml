@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core">
+	<m:OverflowToolbar>
+	
+		<m:SearchField liveChange="onSearchCountryConfig" placeholder="Search" width="32%"/>
+
+		<m:ToolbarSpacer width="12.5%"/>
+		<m:Button id="button4" text="Create" type="Reject" press="onPressConfigCreate" class="savebtn"/>
+		<m:Button id="button2" text="Change" press="onPressConfigChange" class="cancelbtn"/>
+		<m:Button id="button5" text="Delete" press="onPressConfigDelete" class="cancelbtn"/>
+	</m:OverflowToolbar>
+	<Table rows="{path: '/results'}" id="ConfigTable" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange="actionConfig">
+		<columns>
+			<Column width="12rem">
+				<m:Label text="Config Name" design="Bold"/>
+				<template>
+					<m:Text text="{CONFIG_NAME}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Config Value" design="Bold"/>
+				<template>
+					<m:Text text="{CONFIG_VALUE}" wrapping="false"/>
+				</template>
+			</Column>
+		
+		</columns>
+	</Table>
+</core:FragmentDefinition>

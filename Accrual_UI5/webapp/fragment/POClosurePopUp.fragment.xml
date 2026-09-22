@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:t="sap.ui.table" xmlns:core="sap.ui.core" class="sapUiSizeCozy">
+	<Dialog showHeader="true" contentWidth="50%" class="sapUiSizeCozy sapMMessageBoxWarning" title="{i18n>warning}" icon="sap-icon://alert">
+		<beginButton>
+			<Button text="{i18n>MarkPOforClosure}" type="Emphasized" press="onPressContPressPO"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>cancel}" class="classDialogButton" press="onPressCancelS"/>
+		</endButton>
+		<VBox class="sapUiSmallMargin ">
+			<FormattedText htmlText="{/HTML}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

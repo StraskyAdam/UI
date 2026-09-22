@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core">
+	<m:OverflowToolbar>
+
+	
+		<m:Button id="buttonL1" text="Create" type="Reject" press="onPressLangCreate" class="savebtn"/>
+		<!--<m:Button id="button2" text="Change" press="onPressChange" class="cancelbtn"/>-->
+		<m:Button id="buttonL3" text="Delete" press="onPressLangDelete" class="cancelbtn"/>
+	</m:OverflowToolbar>
+	<Table rows="{path: '/results'}" id="langConfigTable" selectionMode="Single" ariaLabelledBy="title" rowSelectionChange="actionLang">
+		<columns>
+			<Column width="auto">
+				<m:Label text="Language Code" design="Bold"/>
+				<template>
+					<m:Text text="{LANG_CODE}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column width="auto">
+				<m:Label text="Language" design="Bold"/>
+				<template>
+					<m:Text text="{LANGUAGE}" wrapping="false"/>
+				</template>
+			</Column>
+			
+		</columns>
+	</Table>
+</core:FragmentDefinition>

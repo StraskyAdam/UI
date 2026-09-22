@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:grid="sap.ui.layout.cssgrid" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Text text="Would like to learn more about the process? Here are quick reference videos" class="errorMsg"/>
+	<VBox id="videoTabId" visible="true">
+		<Table id="VideoTable" width="98.6%" visible="true" itemPress="onItemPress" items="{path: 'refVideoLinkModel>/'}" class="table111"
+			inset="false" growing="true" growingThreshold="10" selectionChange="onSelection" mode="None">
+			<columns>
+				<Column hAlign="Left" width="25rem">
+					<Text text="{i18n>vTitle}" class="tileSubText2"/>
+				</Column>
+				<Column hAlign="Left">
+					<Text text="{i18n>vLink}" class="tileSubText2"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{refVideoLinkModel>VIDEO_DESC}"/>
+						<Link id="vLinkId" text="Link" press="onVideoPress(${refVideoLinkModel>VIDEO_LINK}, true)"/>
+						<!--<Button text="Link" press=".onVideoPress(${refVideoLinkModel>VIDEO_LINK}, true)"/>-->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+	<!--<VBox id="videoId" visible="false">-->
+	<!--	<html:iframe id="srclink" src="" height="470px" width="1200px"></html:iframe>-->
+	<!--	<Button text="{i18n>Close}" press="onCloseRef" class="closeVideo"/>-->
+	<!--</VBox>-->
+</core:FragmentDefinition>

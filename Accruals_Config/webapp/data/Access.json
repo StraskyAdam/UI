@@ -1,0 +1,8 @@
+{
+	"DataAccess": [{
+		"Access": "Read"
+	},{
+		"Access": "Write"	
+	}	
+	]
+}

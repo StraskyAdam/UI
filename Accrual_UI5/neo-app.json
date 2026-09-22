@@ -1,0 +1,41 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/XSA_HTTP_ACCRUAL",
+      "target": {
+        "type": "destination",
+        "name": "XSA_HTTP_ACCRUAL"
+      },
+      "description": "For Accrual usecase"
+    },
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "ODATA_ACCRUALS",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "This is OData Service of ECC : Z_EDGE_ACCRUALS_SRV"
+    }
+  ],
+  "sendWelcomeFileRedirect": true
+}

@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact">
+	<Dialog title="Change Links Configuration" contentWidth="690px" class="dialog" horizontalScrolling="false" id="updateLinkTable">
+		<beginButton>
+			<Button text="Cancel" press="onCancelUpdate" class="cancelbtn"/>
+		</beginButton>
+		<endButton>
+			<Button text="Save" type="Reject" press="onSaveChangeLink" class="savebtn"/>
+		</endButton>
+		<f:SimpleForm id="ChangeFormLink" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1" adjustLabelSpan="false">
+			<f:content>
+				<Label text="{i18n>role}"/>
+				<Input value ="{LangDataUpdateModel>/role}" placeholder="{i18n>role}" required="true" width="290px" maxLength="50" class="select" id="linkRoleChange"/>
+				<Label text="{i18n>linkid}"/>
+				<Input value ="{LangDataUpdateModel>/helpId}" placeholder="{i18n>linkid}" required="true" width="290px" maxLength="50" class="select" id="linkIdChange"/>
+				<Label text="{i18n>lang}"/>
+				<ComboBox selectedKey="{LangDataUpdateModel>/language1}" placeholder="{i18n>lang}" required="true" width="290px" id="linkLangChange" items="{languageDataModel>/}">
+					<core:Item key="{languageDataModel>LANG_CODE}" text="{languageDataModel>LANG_CODE}-{languageDataModel>LANGUAGE}"/>
+				</ComboBox>
+				<Label text="{i18n>reftopic}"/>
+				<Input value ="{LangDataUpdateModel>/helpLinkDesc}" placeholder="{i18n>reftopic}" width="290px" class="select" id="linkTopicChange" editable="true"></Input>
+				<Label text="{i18n>reflink}"/>
+				<Input value ="{LangDataUpdateModel>/helpLink}" placeholder="{i18n>reflink}" width="290px" class="select" id="linkChange" editable="true"></Input>
+			</f:content>
+		</f:SimpleForm>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="Z_EDGE_ACCRUALS_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="POData" sap:content-version="1">
+				<Key><PropertyRef Name="GUID"/></Key><Property Name="GUID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="GUID" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="POCHANGESet" Relationship="Z_EDGE_ACCRUALS_SRV.POData_ChangeSet" FromRole="FromRole_POData_ChangeSet"
+					ToRole="ToRole_POData_ChangeSet"/><NavigationProperty Name="ReturnSet" Relationship="Z_EDGE_ACCRUALS_SRV.POData_ReturnSet" FromRole="FromRole_POData_ReturnSet"
+					ToRole="ToRole_POData_ReturnSet"/></EntityType>
+			<EntityType Name="POCHANGE" sap:content-version="1">
+				<Key><PropertyRef Name="GUID"/><PropertyRef Name="PoNumber"/><PropertyRef Name="ItemNo"/></Key><Property Name="GUID" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="GUID" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PoNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Purchasing Doc."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ItemNo" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Item" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="WtdAmount" Type="Edm.String" Nullable="false" MaxLength="14" sap:unicode="false" sap:label="Services Completed Amount"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="WtdPerc" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Percentage of Services Completed"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Return" sap:content-version="1">
+				<Key><PropertyRef Name="GUID"/><PropertyRef Name="Type"/><PropertyRef Name="Id"/><PropertyRef Name="Number"/></Key><Property Name="GUID" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="GUID" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message type" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Message Class" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Number" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Message number"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message text"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="LogNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Log number" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="LogMsgNo" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Message no." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MessageV1" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MessageV2" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MessageV3" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MessageV4" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Row" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Parameter line" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<Association Name="POData_ReturnSet" sap:content-version="1"><End Type="Z_EDGE_ACCRUALS_SRV.POData" Multiplicity="1" Role="FromRole_POData_ReturnSet"/><End Type="Z_EDGE_ACCRUALS_SRV.Return" Multiplicity="*" Role="ToRole_POData_ReturnSet"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_POData_ReturnSet"><PropertyRef Name="GUID"/></Principal>
+					<Dependent Role="ToRole_POData_ReturnSet"><PropertyRef Name="GUID"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="POData_ChangeSet" sap:content-version="1"><End Type="Z_EDGE_ACCRUALS_SRV.POData" Multiplicity="1" Role="FromRole_POData_ChangeSet"/><End Type="Z_EDGE_ACCRUALS_SRV.POCHANGE" Multiplicity="*" Role="ToRole_POData_ChangeSet"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_POData_ChangeSet"><PropertyRef Name="GUID"/></Principal>
+					<Dependent Role="ToRole_POData_ChangeSet"><PropertyRef Name="GUID"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="Z_EDGE_ACCRUALS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="PODataSet" EntityType="Z_EDGE_ACCRUALS_SRV.POData" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="POCHANGESet" EntityType="Z_EDGE_ACCRUALS_SRV.POCHANGE" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="ReturnSet" EntityType="Z_EDGE_ACCRUALS_SRV.Return" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="POData_ChangeSetSet" Association="Z_EDGE_ACCRUALS_SRV.POData_ChangeSet" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="PODataSet" Role="FromRole_POData_ChangeSet"/><End EntitySet="POCHANGESet" Role="ToRole_POData_ChangeSet"/></AssociationSet>
+				<AssociationSet Name="POData_ReturnSetSet" Association="Z_EDGE_ACCRUALS_SRV.POData_ReturnSet" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="PODataSet" Role="FromRole_POData_ReturnSet"/><End EntitySet="ReturnSet" Role="ToRole_POData_ReturnSet"/></AssociationSet>
+			</EntityContainer><atom:link rel="self"
+				href="https://webidecp-qbynlo6541.dispatcher.eu2.hana.ondemand.com/destinations/ODATA_ACCRUALS/sap/opu/odata/sap/Z_EDGE_ACCRUALS_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version"
+				href="https://webidecp-qbynlo6541.dispatcher.eu2.hana.ondemand.com/destinations/ODATA_ACCRUALS/sap/opu/odata/sap/Z_EDGE_ACCRUALS_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
